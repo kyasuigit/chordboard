@@ -4,8 +4,12 @@ enum Note { C, Cflat, Csharp, D, Dflat, Dsharp, E, Eflat, Esharp, F, Fflat, Fsha
 
 class Piano : public Instrument {
     public:
-        void play(Note) const = 0;{
-            
+        void play(Chord chord) const = 0;{
+            vector<Note> notelist = chord.getnotes();
+            int notecount = chord.numofnotes();
+            for (int i = 0; i<notecount; i++) {}
+                    notelist.front() // code to play audio through API
+            }
         }
         char* whatinstrument() const {
             return "Piano";
