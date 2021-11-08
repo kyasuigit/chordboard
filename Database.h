@@ -14,8 +14,10 @@ class Database {
     public: 
 
         // Generating a vector for all relevant chords.
-        Vector <Chord> findRelevantChords(); 
+        vector <Chord> findRelevantChords(); 
         
         // Generating a vector for all possible genres.
-        Vector<Genre> generateGenreList();
+        vector<Genre> generateGenreList();
 }
+
+#endif
