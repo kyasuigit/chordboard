@@ -18,6 +18,6 @@ class Database {
         
         // Generating a vector for all possible genres.
         vector<Genre> generateGenreList();
-}
+};
 
 #endif

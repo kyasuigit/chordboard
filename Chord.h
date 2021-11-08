@@ -18,4 +18,6 @@ class Chord{
         void insertNode (Note newNote);
         void removeNote (Note selectNote);
         void setScale (string newScale);
-}
+};
+
+#endif 

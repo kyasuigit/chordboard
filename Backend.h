@@ -16,6 +16,6 @@ class Backend {
         Chord calculateChords(Chord newChord);
         void inputIntoChordList();
         Chord returnSelectChord();
-}
+};
 
 #endif 

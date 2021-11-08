@@ -16,6 +16,6 @@ class Genre{
         Genre (string newGenre)
         // Assuming that this method is supposed to determine a vector of chords.
         vector<Chords> findChords();
-}
+};
 
 #endif

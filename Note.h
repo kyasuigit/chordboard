@@ -15,6 +15,6 @@ class Note{
         char returnNoteName();
         int returnOctave();
         void changeOctave(int newOctave);
-}
+};
 
 #endif
