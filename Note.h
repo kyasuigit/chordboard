@@ -2,8 +2,6 @@
 #define NOTE_H
 
 #include <iostream>
-#include <cstdio>
-#include <csdlib>
 
 class Note{
     private:

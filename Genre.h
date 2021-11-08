@@ -2,8 +2,6 @@
 #define GENRE_H
 
 #include <iostream>
-#include <cstudio>
-#include <csdlib>
 #include "Chords.h"
 
 class Genre{

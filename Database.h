@@ -2,8 +2,6 @@
 #define DATABASE_H
 
 #include <iostream>
-#include <cstudio>
-#include <csdlib>
 #include "Genre.h"
 #include "Chord.h"
 
