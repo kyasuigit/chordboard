@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <cstdio>
-#include <csdlib>
+// #include <csdlib>
 
 class Note{
     private:
@@ -15,6 +15,6 @@ class Note{
         char returnNoteName();
         int returnOctave();
         void changeOctave(int newOctave);
-}
+};
 
 #endif

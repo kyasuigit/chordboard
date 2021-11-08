@@ -3,7 +3,8 @@
 
 #include <iostream>
 #include<cstdio>
-#include <csdlib>
+#include <string>
+// #include <csdlib>
 #include <vector>
 #include <algorithm>
 #include "Note.h"
@@ -14,8 +15,10 @@ class Chord{
         vector <Note> noteList;
     
     public:
-        Chord (String chordScale);
+        Chord (string chordScale);
         void insertNode (Note newNote);
         void removeNote (Note selectNote);
         void setScale (string newScale);
-}
+};
+
+#endif 
