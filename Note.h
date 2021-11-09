@@ -2,17 +2,18 @@
 #define NOTE_H
 
 #include <iostream>
+#include <string.h>
 
 class Note{
     private:
-        char noteName;
+        std::string noteName;
         int octave;
 
     public:
-        Note (char Name);
-        char returnNoteName();
+        Note (std::string name, int oct);
+        std::string returnNoteName();
         int returnOctave();
         void changeOctave(int newOctave);
 };
 
-#endif
+#endif // NOTE_H

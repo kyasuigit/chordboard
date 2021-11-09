@@ -1,21 +1,21 @@
-#ifndef CHORD_h
+#ifndef CHORD_H
 #define CHORD_H
-
+#include "note.h"
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include "Note.h"
 
 class Chord{
     private:
-        string scale;
-        vector <Note> noteList;
-    
+        std::string scale;
+        std::vector <Note> noteList;
+
     public:
-        Chord (string chordScale);
-        void insertNode (Note newNote);
+        Chord();
+        Chord(std::string chordScale);
+        void insertNote (Note newNote);
         void removeNote (Note selectNote);
-        void setScale (string newScale);
+        void setScale (std::string newScale);
+        std::vector<Note> returnNoteVector();
 };
 
-#endif 
+#endif // CHORD_H

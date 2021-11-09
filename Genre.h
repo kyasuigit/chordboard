@@ -2,7 +2,7 @@
 #define GENRE_H
 
 #include <iostream>
-#include "Chords.h"
+#include "chord.h"
 
 class Genre{
 
@@ -11,9 +11,9 @@ class Genre{
         vector<Chord> preferredChords; // Vector to store the chords that sound good with the given input.
 
     public:
-        Genre (string newGenre)
+        Genre (string newGenre);
         // Assuming that this method is supposed to determine a vector of chords.
-        vector<Chords> findChords();
+        vector<Chord> findChords();
 };
 
 #endif

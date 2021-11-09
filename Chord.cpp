@@ -1,25 +1,26 @@
-#include "Chord.h"
+#include "chord.h"
 
-using namespace std;
+Chord::Chord(){
+}
 
-class Chord{
-    // Constructor for the class.
-    Chord::Chord(string chordScale){
-        scale = chordScale;
-    }
+Chord::Chord(std::string chordScale){
+    scale = chordScale;
+}
 
-    // Method used to add a new note to the vector.
-    void Chord::insertNote (Note newNote){
-        noteList.push_back(newNote);
-    }
+// Method used to add a new note to the vector.
+void Chord::insertNote (Note newNote){
+    noteList.push_back(newNote);
+}
 
-    // Method to remove a select note from the list. Uses erase-remove idiom.
-    void Chord::removeNote (Note selectNote){
-        noteList.erase (std::remove (noteList.begin(), noteList.end(), selectNote), noteList.end());
-    }
+// Method to remove a select note from the list. Uses erase-remove idiom.
+void Chord::removeNote (Note selectNote){
+}
 
-    // Method to change the scale of the given chord.
-    void Chord::setScale (string newScale){
-        scale = newScale;
-    }
+// Method to change the scale of the given chord.
+void Chord::setScale (std::string newScale){
+    scale = newScale;
+}
+
+std::vector<Note> Chord::returnNoteVector() {
+    return noteList;
 }
