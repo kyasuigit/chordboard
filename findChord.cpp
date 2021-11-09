@@ -1,6 +1,26 @@
 #include "findChord.h"
 
 
+bool containsNote (Note inputNote, Chord inputChord){
+    
+    // Grabbing the existing vector of notes.
+    std::vector<Note> Notes = inputChord.returnNoteVector();
+
+    // We will loop through the note vector to see if the note exists. If it does
+    // return the note and if not, return NULL
+
+    auto it = std::find (Notes.begin(), Notes.end(), inputNote);
+
+    // Found the item so return it.
+    if (it != Notes.end()){
+        true;
+    }
+
+    // Otherwise, return a NULL object.
+    else{
+        false;
+    }
+}
 
 Chord findMajor(Chord inputChord){
     int chordSize = inputChord.returnNoteVector().size();

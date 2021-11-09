@@ -29,8 +29,9 @@ class findChord{
             int octave;
         }
         
-      
-
+        bool containsNote (Note inputNote, Chord inputChord){
+            std::vector <Note> Notes;
+        }
 
 };
 
