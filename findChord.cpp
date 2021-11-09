@@ -1,5 +1,8 @@
 #include "findChord.h"
+#include <algorithm>
 
+
+using namespace std;
 
 bool containsNote (Note inputNote, Chord inputChord){
     
@@ -11,12 +14,12 @@ bool containsNote (Note inputNote, Chord inputChord){
 
     auto it = std::find (Notes.begin(), Notes.end(), inputNote);
 
-    // Found the item so return it.
+    // Found the item so return true.
     if (it != Notes.end()){
         true;
     }
 
-    // Otherwise, return a NULL object.
+    // Otherwise, return false.
     else{
         false;
     }
