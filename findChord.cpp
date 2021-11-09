@@ -41,7 +41,11 @@ Note majorKey(Note inputNote, Chord existingNotes){
 
     }
 
-    return newNote();
+    //Create a contains method
+    // if (existingNotes.returnNoteVector.contains(newNote())){
+    //     return newNote();
+    // }
+
 
 };
 
@@ -60,11 +64,16 @@ Note minorKey(Note inputNote){
     int i;
     i = rand() % 3 + 1;
 
-    
+    Note newNote();
+
+    int position = notePosition(inputNote);
 
     // Base form
     if (i == 1){
+        //Minor third
 
+        position = position + 3;
+        Note newNote = posToNote(position);
     }
 
     // First Inversion
@@ -76,7 +85,6 @@ Note minorKey(Note inputNote){
     else if (i == 3){
 
     }
-
 
 };
 
