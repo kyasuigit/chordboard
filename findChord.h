@@ -14,7 +14,7 @@ class findChord{
             int chordSize;
             std::vector <Note> Notes;
         }
-        Note majorKey(Note inputNote){
+        Chord majorKey(Note inputNotem Chord existingNotes){
             int i;
             int position;
         }

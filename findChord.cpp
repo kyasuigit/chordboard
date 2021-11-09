@@ -25,26 +25,38 @@ bool containsNote (Note inputNote, Chord inputChord){
     }
 }
 
+// This needs to return a vector of chords not a chord itself.
 Chord findMajor(Chord inputChord){
     int chordSize = inputChord.returnNoteVector().size();
     std::vector<Note> Notes = inputChord.returnNoteVector();
     Chord existingNotes;
 
-    for(int i=0; i < Notes.size(); i++){
-        Note newNote = majorKey(Notes[i], existingNotes);
-        existingNotes.insertNote((Notes[i]));
+    std::vector <Chord> Chords;
+
+    // For the inputchord we will loop through the notes in the chord and 
+    // find all of the new chords.
+    for (int i = 0; i < Notes.size(); i++){
+        // Push the new chords to the vector.
+        Chords.push_back(majorKey (Notes[i]), existingNotes);
     }
 
-    return existingNotes;
+    // For every note in the input chord
+    // for(int i=0; i < Notes.size(); i++){
+    //     Note newNote = majorKey(Notes[i], existingNotes);
+    //     existingNotes.insertNote((Notes[i]));
+    // }
+
+    return Chords;
 
 };
 
-Note majorKey(Note inputNote, Chord existingNotes){
+Chord majorKey(Note inputNote, Chord existingNotes){
 
     int i;
     i = rand() % 3 + 1;
     
     Note newNote();
+    Note secondNote();
 
     int position = notePosition(inputNote);
 
@@ -53,7 +65,12 @@ Note majorKey(Note inputNote, Chord existingNotes){
         //Major third
         position = position + 4;
         Note newNote = posToNote(position);
+        position = position + 3;
+        Note secondNote = posToNote(position);
     }
+
+    // The following inversions need to be completed.
+
     // First Inversion
     else if (i == 2){
 
@@ -64,6 +81,15 @@ Note majorKey(Note inputNote, Chord existingNotes){
 
     }
 
+    // Make a new chord and add the notes to the chord
+    Chord newNotes;
+    newNotes.insertNote(inputNote);
+    newNotes.insertNote(newNote);
+    newNotes.insertNote(secondNote);
+
+    // We will return a chord with the given notes in it.
+    return newNotes;
+    
     //Create a contains method
     // if (existingNotes.returnNoteVector.contains(newNote())){
     //     return newNote();
