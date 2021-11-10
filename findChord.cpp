@@ -18,12 +18,12 @@ bool findChord::containsNote (Note inputNote, Chord inputChord){
 
     // Found the item so return true.
     if (it != inputChord.returnNoteVector().end()){
-        true;
+        return true;
     }
 
     // Otherwise, return false.
     else{
-        false;
+        return false;
     }
 }
 
@@ -56,11 +56,11 @@ Chord findChord::majorKey(Note inputNote){
 
     int i;
     i = rand() % 3 + 1;
-    
-    Note newNote();
-    Note secondNote();
 
     int position = notePosition(inputNote);
+
+    Note newNote;
+    Note secondNote;
 
     // Base form
     if (i == 1){
@@ -105,6 +105,9 @@ Chord findChord::findMinor(Chord inputChord){
     for(int i=0; i < Notes.size(); i++){
         minorKey(Notes[i]);
     }
+
+    // Incomplete... not allowing return of null
+    return NULL;
 };
 
 Note findChord::minorKey(Note inputNote){
@@ -134,9 +137,8 @@ Note findChord::minorKey(Note inputNote){
 
     }
     
-    // Incomplete...
+    // Incomplete... not allowing return of null
     return NULL;
-
 };
 
 int findChord::notePosition(Note inputNote){
@@ -147,29 +149,29 @@ int findChord::notePosition(Note inputNote){
     ocativeMultiplier = ocativeMultiplier * 7;
 
     //Returns relative position, add equivalence classes for flats later
-    if (noteName == "C"){
+    if (noteName.compare("C") == 0){
         return 1 + ocativeMultiplier;
-    } else if (noteName == "C#"){
+    } else if (noteName.compare("C#") == 0){
         return 2 + ocativeMultiplier;
-    } else if (noteName == "D"){
+    } else if (noteName.compare("D") == 0){
         return 3 + ocativeMultiplier;
-    } else if (noteName == "D#"){
+    } else if (noteName.compare("D#") == 0){
         return 4 + ocativeMultiplier;
-    } else if (noteName == "E"){
+    } else if (noteName.compare("E") == 0){
         return 5 + ocativeMultiplier;
-    } else if (noteName == "F"){
+    } else if (noteName.compare ("F") == 0){
         return 6 + ocativeMultiplier;
-    } else if (noteName == "F#"){
+    } else if (noteName.compare("F#") == 0){
         return 7 + ocativeMultiplier;
-    } else if (noteName == "G"){
+    } else if (noteName.compare("G") == 0){
         return 8 + ocativeMultiplier;
-    } else if (noteName == "G#"){
+    } else if (noteName.compare("G#") == 0){
         return 9 + ocativeMultiplier;
-    } else if (noteName == "A"){
+    } else if (noteName.compare("A") == 0){
         return 10 + ocativeMultiplier;
-    } else if (noteName == "A#"){
+    } else if (noteName.compare ("A#") == 0){
         return 11 + ocativeMultiplier;
-    } else if (noteName == "B"){
+    } else if (noteName.compare ("B") == 0){
         return 12 + ocativeMultiplier;
     }
 }
