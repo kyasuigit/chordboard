@@ -4,18 +4,20 @@
 
 using namespace std;
 
-bool containsNote (Note inputNote, Chord inputChord){
-    
-    // Grabbing the existing vector of notes.
-    std::vector<Note> Notes = inputChord.returnNoteVector();
+// Constructor for the class.
+findChord::findChord (Chord inputChord){
 
+    // Vector of notes.
+    std::vector <Note> Notes = inputChord.returnNoteVector();
+}   
+
+bool findChord::containsNote (Note inputNote, Chord inputChord){
     // We will loop through the note vector to see if the note exists. If it does
     // return the note and if not, return NULL
-
-    auto it = std::find (Notes.begin(), Notes.end(), inputNote);
+    auto it = std::find (inputChord.returnNoteVector().begin(), inputChord.returnNoteVector().end(), inputNote);
 
     // Found the item so return true.
-    if (it != Notes.end()){
+    if (it != inputChord.returnNoteVector().end()){
         true;
     }
 
@@ -26,10 +28,10 @@ bool containsNote (Note inputNote, Chord inputChord){
 }
 
 // This needs to return a vector of chords not a chord itself.
-Chord findMajor(Chord inputChord){
+std::vector<Chord> findChord::findMajor(Chord inputChord){
     int chordSize = inputChord.returnNoteVector().size();
     std::vector<Note> Notes = inputChord.returnNoteVector();
-    Chord existingNotes;
+    // Chord existingNotes;
 
     std::vector <Chord> Chords;
 
@@ -37,7 +39,7 @@ Chord findMajor(Chord inputChord){
     // find all of the new chords.
     for (int i = 0; i < Notes.size(); i++){
         // Push the new chords to the vector.
-        Chords.push_back(majorKey (Notes[i]), existingNotes);
+        Chords.push_back(majorKey (Notes[i]));
     }
 
     // For every note in the input chord
@@ -50,7 +52,7 @@ Chord findMajor(Chord inputChord){
 
 };
 
-Chord majorKey(Note inputNote, Chord existingNotes){
+Chord findChord::majorKey(Note inputNote){
 
     int i;
     i = rand() % 3 + 1;
@@ -94,21 +96,18 @@ Chord majorKey(Note inputNote, Chord existingNotes){
     // if (existingNotes.returnNoteVector.contains(newNote())){
     //     return newNote();
     // }
-
-
 };
 
-Chord findMinor(Chord inputChord){
+Chord findChord::findMinor(Chord inputChord){
     int chordSize = inputChord.returnNoteVector().size();
     std::vector<Note> Notes = inputChord.returnNoteVector();
 
     for(int i=0; i < Notes.size(); i++){
         minorKey(Notes[i]);
     }
-
 };
 
-Note minorKey(Note inputNote){
+Note findChord::minorKey(Note inputNote){
 
     int i;
     i = rand() % 3 + 1;
@@ -134,10 +133,13 @@ Note minorKey(Note inputNote){
     else if (i == 3){
 
     }
+    
+    // Incomplete...
+    return NULL;
 
 };
 
-int notePosition(Note inputNote){
+int findChord::notePosition(Note inputNote){
     std::string noteName = inputNote.returnNoteName();
     int octave = inputNote.returnOctave();
 
@@ -172,7 +174,7 @@ int notePosition(Note inputNote){
     }
 }
 
-Note posToNote(int position){
+Note findChord::posToNote(int position){
 
     int Octave = position % 13;
     std::string keyName;

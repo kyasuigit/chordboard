@@ -6,32 +6,16 @@
 class findChord{
 
     private:
-        Chord findMajor(Chord inputChord){
-            int chordSize;
-            std::vector <Note> Notes;
-        }
-        Chord findMinor(Chord inputChord){
-            int chordSize;
-            std::vector <Note> Notes;
-        }
-        Chord majorKey(Note inputNotem Chord existingNotes){
-            int i;
-            int position;
-        }
-
-        Note minorKey(Note inputNote){
-            int i;
-            int position;   
-        }
-
-        int notePosition(Note inputNote){
-            std::string noteName;
-            int octave;
-        }
+        std::vector <Note> Notes;
         
-        bool containsNote (Note inputNote, Chord inputChord){
-            std::vector <Note> Notes;
-        }
+    public:
+        findChord(Chord inputChord)
+        std::vector<Chord> findMajor(Chord inputChord);
+        Chord findMinor(Chord inputChord);
+        Chord majorKey(Note inputNote);
+        Note minorKey(Note inputNote);
+        int notePosition(Note inputNote);
+        bool containsNote (Note inputNote, Chord inputChord);
 
 };
 
