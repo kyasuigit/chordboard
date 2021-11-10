@@ -1,7 +1,6 @@
 #include "findChord.h"
 #include <algorithm>
 
-
 using namespace std;
 
 // Constructor for the class.
@@ -59,8 +58,9 @@ Chord findChord::majorKey(Note inputNote){
 
     int position = notePosition(inputNote);
 
-    Note newNote;
-    Note secondNote;
+    // Placeholder notes; need to make a constructor to allow for empty notes for this method.
+    Note newNote = Note ("C", 0);
+    Note secondNote = Note ("D", 0);
 
     // Base form
     if (i == 1){
@@ -106,8 +106,11 @@ Chord findChord::findMinor(Chord inputChord){
         minorKey(Notes[i]);
     }
 
-    // Incomplete... not allowing return of null
-    return NULL;
+    // Empty chord so we can compile for now.
+    Chord newChord = Chord ("FLAT");
+    
+    // Incomplete... 
+    return newChord;
 };
 
 Note findChord::minorKey(Note inputNote){
@@ -136,9 +139,11 @@ Note findChord::minorKey(Note inputNote){
     else if (i == 3){
 
     }
-    
+
+    Note newestNote = Note ("C", 0);
+
     // Incomplete... not allowing return of null
-    return NULL;
+    return newestNote;
 };
 
 int findChord::notePosition(Note inputNote){
