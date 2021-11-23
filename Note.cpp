@@ -1,4 +1,4 @@
-#include "note.h"
+#include "Note.h"
 
 Note::Note(std::string name, int oct){
     noteName = name;
@@ -19,3 +19,4 @@ int Note::returnOctave(){
 void Note::changeOctave(int newOctave){
     octave = newOctave;
 }
+

@@ -1,6 +1,7 @@
 #include "findChord.h"
 #include <algorithm>
 
+
 using namespace std;
 
 // Constructor for the class.
@@ -8,7 +9,7 @@ findChord::findChord (Chord inputChord){
 
     // Vector of notes.
     std::vector <Note> Notes = inputChord.returnNoteVector();
-}   
+}
 
 bool findChord::containsNote (Note inputNote, Chord inputChord){
     // We will loop through the note vector to see if the note exists. If it does
@@ -17,12 +18,12 @@ bool findChord::containsNote (Note inputNote, Chord inputChord){
 
     // Found the item so return true.
     if (it != inputChord.returnNoteVector().end()){
-        return true;
+        true;
     }
 
     // Otherwise, return false.
     else{
-        return false;
+        false;
     }
 }
 
@@ -34,7 +35,7 @@ std::vector<Chord> findChord::findMajor(Chord inputChord){
 
     std::vector <Chord> Chords;
 
-    // For the inputchord we will loop through the notes in the chord and 
+    // For the inputchord we will loop through the notes in the chord and
     // find all of the new chords.
     for (int i = 0; i < Notes.size(); i++){
         // Push the new chords to the vector.
@@ -56,11 +57,11 @@ Chord findChord::majorKey(Note inputNote){
     int i;
     i = rand() % 3 + 1;
 
-    int position = notePosition(inputNote);
+    // Just some random notes. These are the base notes that will be overrided later
+    Note newNote ("C", 0);
+    Note secondNote ("D", 0);
 
-    // Placeholder notes; need to make a constructor to allow for empty notes for this method.
-    Note newNote = Note ("C", 0);
-    Note secondNote = Note ("D", 0);
+    int position = notePosition(inputNote);
 
     // Base form
     if (i == 1){
@@ -91,7 +92,7 @@ Chord findChord::majorKey(Note inputNote){
 
     // We will return a chord with the given notes in it.
     return newNotes;
-    
+
     //Create a contains method
     // if (existingNotes.returnNoteVector.contains(newNote())){
     //     return newNote();
@@ -102,14 +103,13 @@ Chord findChord::findMinor(Chord inputChord){
     int chordSize = inputChord.returnNoteVector().size();
     std::vector<Note> Notes = inputChord.returnNoteVector();
 
+    // Make a new chord. Temporary chord for now...
+    Chord newChord ("SCALE");
+
     for(int i=0; i < Notes.size(); i++){
-        minorKey(Notes[i]);
+        newChord.insertNote(minorKey(Notes[i]));
     }
 
-    // Empty chord so we can compile for now.
-    Chord newChord = Chord ("FLAT");
-    
-    // Incomplete... 
     return newChord;
 };
 
@@ -118,7 +118,7 @@ Note findChord::minorKey(Note inputNote){
     int i;
     i = rand() % 3 + 1;
 
-    Note newNote();
+    Note newNote("E", 0);
 
     int position = notePosition(inputNote);
 
@@ -140,10 +140,9 @@ Note findChord::minorKey(Note inputNote){
 
     }
 
-    Note newestNote = Note ("C", 0);
+    // Incomplete...
+    return newNote;
 
-    // Incomplete... not allowing return of null
-    return newestNote;
 };
 
 int findChord::notePosition(Note inputNote){
@@ -154,32 +153,35 @@ int findChord::notePosition(Note inputNote){
     ocativeMultiplier = ocativeMultiplier * 7;
 
     //Returns relative position, add equivalence classes for flats later
-    if (noteName.compare("C") == 0){
+    if (noteName == "C"){
         return 1 + ocativeMultiplier;
-    } else if (noteName.compare("C#") == 0){
+    } else if (noteName == "C#"){
         return 2 + ocativeMultiplier;
-    } else if (noteName.compare("D") == 0){
+    } else if (noteName == "D"){
         return 3 + ocativeMultiplier;
-    } else if (noteName.compare("D#") == 0){
+    } else if (noteName == "D#"){
         return 4 + ocativeMultiplier;
-    } else if (noteName.compare("E") == 0){
+    } else if (noteName == "E"){
         return 5 + ocativeMultiplier;
-    } else if (noteName.compare ("F") == 0){
+    } else if (noteName == "F"){
         return 6 + ocativeMultiplier;
-    } else if (noteName.compare("F#") == 0){
+    } else if (noteName == "F#"){
         return 7 + ocativeMultiplier;
-    } else if (noteName.compare("G") == 0){
+    } else if (noteName == "G"){
         return 8 + ocativeMultiplier;
-    } else if (noteName.compare("G#") == 0){
+    } else if (noteName == "G#"){
         return 9 + ocativeMultiplier;
-    } else if (noteName.compare("A") == 0){
+    } else if (noteName == "A"){
         return 10 + ocativeMultiplier;
-    } else if (noteName.compare ("A#") == 0){
+    } else if (noteName == "A#"){
         return 11 + ocativeMultiplier;
-    } else if (noteName.compare ("B") == 0){
+    } else if (noteName == "B"){
         return 12 + ocativeMultiplier;
     }
-}
+
+    // Need to return something at the end just return some 13 + octiveMultiplier
+    return 13 + ocativeMultiplier;
+};
 
 Note findChord::posToNote(int position){
 
@@ -223,4 +225,7 @@ Note findChord::posToNote(int position){
         Note returnedNote("B", Octave);
         return returnedNote;
     }
-}
+
+    Note returnedNote ("ED", Octave);
+    return returnedNote;
+};

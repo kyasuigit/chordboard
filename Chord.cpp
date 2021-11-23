@@ -1,4 +1,4 @@
-#include "chord.h"
+#include "Chord.h"
 
 Chord::Chord(){
 }

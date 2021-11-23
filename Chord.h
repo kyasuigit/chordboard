@@ -1,6 +1,6 @@
 #ifndef CHORD_H
 #define CHORD_H
-#include "Note.h"
+#include "note.h"
 #include <iostream>
 #include <vector>
 

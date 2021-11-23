@@ -12,10 +12,10 @@ class Database {
     public: 
 
         // Generating a vector for all relevant chords.
-        vector <Chord> findRelevantChords(); 
+        std::vector<Chord> findRelevantChords(); 
         
         // Generating a vector for all possible genres.
-        vector<Genre> generateGenreList();
+        // std::vector<Genre> generateGenreList();
 };
 
 #endif

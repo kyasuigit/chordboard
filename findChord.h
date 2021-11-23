@@ -1,13 +1,13 @@
 #ifndef FINDCHORD_H
 #define FINDCHORD_H
-#include "Chord.h"
+#include "chord.h"
 #include <random>
 
 class findChord{
 
     private:
         std::vector <Note> Notes;
-        
+
     public:
         findChord(Chord inputChord);
         std::vector<Chord> findMajor(Chord inputChord);
@@ -16,7 +16,7 @@ class findChord{
         Note minorKey(Note inputNote);
         int notePosition(Note inputNote);
         bool containsNote (Note inputNote, Chord inputChord);
-        Note posToNote(int position);
+        Note posToNote (int position);
 
 };
 
