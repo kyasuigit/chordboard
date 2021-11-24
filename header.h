@@ -4,6 +4,7 @@
 // #include <iostream>
 #include <string>
 #include <vector>
+#include <iostream>
 #include "Chord.h"
 
 #include "Database.h"
