@@ -14,6 +14,7 @@ class Note{
         std::string returnNoteName();
         int returnOctave();
         void changeOctave(int newOctave);
+        void changeNote(std::string Note);
 };
 
 #endif // NOTE_H

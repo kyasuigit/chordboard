@@ -20,3 +20,7 @@ void Note::changeOctave(int newOctave){
     octave = newOctave;
 }
 
+void Note::changeNote(std::string Note){
+    noteName = Note;
+}
+
