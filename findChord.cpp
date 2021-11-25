@@ -18,22 +18,6 @@ findChord::findChord (Chord inputChord){
     std::vector <Note> Notes = inputChord.returnNoteVector();
 }
 
-// bool findChord::containsNote (Note inputNote, Chord inputChord){
-//     // We will loop through the note vector to see if the note exists. If it does
-//     // return the note and if not, return NULL
-//     auto it = std::find (inputChord.returnNoteVector().begin(), inputChord.returnNoteVector().end(), inputNote);
-
-//     // Found the item so return true.
-//     if (it != inputChord.returnNoteVector().end()){
-//         return true;
-//     }
-
-//     // Otherwise, return false.
-//     else{
-//         return false;
-//     }
-// }
-
 // This needs to return a vector of chords not a chord itself.
 std::vector<Chord> findChord::findMajor(Chord inputChord){
     int chordSize = inputChord.returnNoteVector().size();
@@ -41,7 +25,6 @@ std::vector<Chord> findChord::findMajor(Chord inputChord){
     // Chord existingNotes;
 
     std::vector <Chord> Chords;
-
     
     // For the inputchord we will loop through the notes in the chord and
     // find all of the new chords.
@@ -52,14 +35,7 @@ std::vector<Chord> findChord::findMajor(Chord inputChord){
         }
     }
 
-    // For every note in the input chord
-    // for(int i=0; i < Notes.size(); i++){
-    //     Note newNote = majorKey(Notes[i], existingNotes);
-    //     existingNotes.insertNote((Notes[i]));
-    // }
-
     return Chords;
-
 };
 
 Chord findChord::majorKey(Note inputNote, int inversion){
@@ -119,42 +95,90 @@ Chord findChord::majorKey(Note inputNote, int inversion){
     // We will return a chord with the given notes in it.
     return newNotes;
 
-    //Create a contains method
-    // if (existingNotes.returnNoteVector.contains(newNote())){
-    //     return newNote();
-    // }
 };
 
-Chord findChord::findMinor(Chord inputChord){
-    int chordSize = inputChord.returnNoteVector().size();
+std::vector<Chord> findChord::findMinor(Chord inputChord){
+  int chordSize = inputChord.returnNoteVector().size();
     std::vector<Note> Notes = inputChord.returnNoteVector();
+    // Chord existingNotes;
 
-    // Make a new chord. Temporary chord for now...
-    Chord newChord ("SCALE");
-
-    for(int i=0; i < Notes.size(); i++){
-        newChord.insertNote(minorKey(Notes[i]));
+    std::vector <Chord> Chords;
+    
+    // For the inputchord we will loop through the notes in the chord and
+    // find all of the new chords.
+    for (int i = 0; i < Notes.size(); i++){
+        // Push the new chords to the vector, three chords per note
+        for (int x = 1; x <= 3; x++){
+            Chords.push_back(minorKey (Notes[i], x));
+        }
     }
 
-    return newChord;
+    return Chords;
+
 };
 
-Note findChord::minorKey(Note inputNote){
+Chord findChord::minorKey(Note inputNote, int inversion){
 
-    int i;
-    i = rand() % 3 + 1;
+    // int i;
+    // i = rand() % 3 + 1;
 
-    Note newNote("E", 0);
+    // Just some random notes. These are the base notes that will be overrided later
+    Note firstNote = inputNote;
+    Note secondNote ("C", 0);
+    Note thirdNote ("D", 0);
 
     int position = notePosition(inputNote);
 
     // Base form
-    if (i == 1){
-        //Minor third
-
+    if (inversion == 1){
+    // Major third
         position = position + 3;
-        Note newNote = posToNote(position);
+        secondNote = posToNote(position);
+        position = position + 4; 
+        thirdNote = posToNote(position);
+        // std::cout << firstNote.returnNoteName();
+        // std::cout << secondNote.returnNoteName();
+        // std::cout << thirdNote.returnNoteName();
+
     }
+
+    // The following inversions need to be completed.
+
+    // First Inversion
+    else if (inversion == 2){
+        position = position + 3;
+        firstNote = posToNote(position);
+        position = position + 4;
+        secondNote = posToNote(position);
+        position = position + 5; 
+        thirdNote = posToNote(position);
+        std::cout << "second-inversion ";
+    }
+
+    // // Second Inversion
+    else if (inversion == 3){
+        position = position + 7;
+        firstNote = posToNote(position);
+        position = position + 5;
+        secondNote = posToNote(position);
+        position = position + 3;
+        thirdNote = posToNote(position);
+        std::cout << "third-inversion ";
+    }
+
+    // Make a new chord and add the notes to the chord
+    Chord newNotes;
+    newNotes.insertNote(firstNote);
+  
+
+    newNotes.insertNote(secondNote);
+    newNotes.insertNote(thirdNote);
+
+    // std::cout << newNote.returnNoteName() << endl;
+    // std::cout << secondNote.returnNoteName() << endl;
+
+    // We will return a chord with the given notes in it.
+    return newNotes;
 
 
 };

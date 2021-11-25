@@ -12,9 +12,9 @@ class findChord{
         findChord();
         findChord(Chord inputChord);
         std::vector<Chord> findMajor(Chord inputChord);
-        Chord findMinor(Chord inputChord);
+        std::vector<Chord> findMinor(Chord inputChord);
         Chord majorKey(Note inputNote, int inversion);
-        Note minorKey(Note inputNote);
+        Chord minorKey(Note inputNote, int inversion);
         int notePosition(Note inputNote);
         bool containsNote (Note inputNote, Chord inputChord);
         Note posToNote (int position);
