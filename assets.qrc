@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/piano">
+        <file>assets/piano.webp</file>
+    </qresource>
+</RCC>
