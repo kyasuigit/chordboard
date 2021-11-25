@@ -5,11 +5,11 @@
 int main(){
     // Creates a chord and note 
     Chord testChord("Major");
-    Note middleC("C", 4);
+    Note middleC("D", 4);
     Note middleE("E", 4);
     
     testChord.insertNote(middleC);
-    // testChord.insertNote(middleE);
+    testChord.insertNote(middleE);
     
     findChord tryMajor(testChord);
 
@@ -27,19 +27,16 @@ int main(){
         
         for (unsigned x=0; x < thisGay.size(); x++){
             Note thisThing = thisGay.at(x);
-            std::cout << "Chord " + i + thisThing.returnNoteName() << std::endl;
-        }
-
-       
-        
+            std::cout << "Chord " << i << thisThing.returnNoteName() << std::endl;
+        }    
     }
 
-    for (int i=0; i< minorChord.size(); i++){
-        vector<Note> secondGey = minorChord.at(i).returnNoteVector();
+    for (int j=0; j< minorChord.size(); j++){
+        vector<Note> secondGey = minorChord.at(j).returnNoteVector();
         
         for (unsigned x=0; x < secondGey.size(); x++){
-            Note thisThing = secondGey.at(i);
-            std::cout << "Chord2 " + i + thisThing.returnNoteName() << std::endl;
+            Note thisThing = secondGey.at(x);
+            std::cout << "Chord2 " << j << thisThing.returnNoteName() << std::endl;
         }
     }
         

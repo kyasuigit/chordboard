@@ -15,7 +15,7 @@ findChord::findChord(){
 findChord::findChord (Chord inputChord){
 
     // Vector of notes.
-    std::vector <Note> Notes = inputChord.returnNoteVector();
+    // std::vector <Note> Notes = inputChord.returnNoteVector();
 }
 
 // This needs to return a vector of chords not a chord itself.
@@ -39,9 +39,6 @@ std::vector<Chord> findChord::findMajor(Chord inputChord){
 };
 
 Chord findChord::majorKey(Note inputNote, int inversion){
-
-    // int i;
-    // i = rand() % 3 + 1;
 
     // Just some random notes. These are the base notes that will be overrided later
     Note firstNote = inputNote;
@@ -119,9 +116,6 @@ std::vector<Chord> findChord::findMinor(Chord inputChord){
 
 Chord findChord::minorKey(Note inputNote, int inversion){
 
-    // int i;
-    // i = rand() % 3 + 1;
-
     // Just some random notes. These are the base notes that will be overrided later
     Note firstNote = inputNote;
     Note secondNote ("C", 0);
@@ -152,7 +146,7 @@ Chord findChord::minorKey(Note inputNote, int inversion){
         secondNote = posToNote(position);
         position = position + 5; 
         thirdNote = posToNote(position);
-        std::cout << "second-inversion ";
+        // std::cout << "second-inversion ";
     }
 
     // // Second Inversion
@@ -163,14 +157,12 @@ Chord findChord::minorKey(Note inputNote, int inversion){
         secondNote = posToNote(position);
         position = position + 3;
         thirdNote = posToNote(position);
-        std::cout << "third-inversion ";
+        // std::cout << "third-inversion ";
     }
 
     // Make a new chord and add the notes to the chord
     Chord newNotes;
     newNotes.insertNote(firstNote);
-  
-
     newNotes.insertNote(secondNote);
     newNotes.insertNote(thirdNote);
 
