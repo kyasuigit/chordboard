@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/assets">
+        <file>drum_topdown_graphicx.jpg</file>
+        <file>another_drum.jpg</file>
+        <file>more_drums.jpg</file>
+    </qresource>
+    <qresource prefix="/sound_files">
+        <file>snare.wav</file>
+        <file>closed_hihat.wav</file>
+        <file>crash_cymbal.wav</file>
+        <file>high_tom_short_reverb.wav</file>
+        <file>medium_tom.wav</file>
+        <file>ride_cymbal.wav</file>
+        <file>bass_drum.wav</file>
+        <file>floor_tom.wav</file>
+        <file>open_hihat.wav</file>
+        <file>hi_tom.wav</file>
+    </qresource>
+</RCC>
