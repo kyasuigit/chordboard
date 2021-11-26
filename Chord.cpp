@@ -24,3 +24,14 @@ void Chord::setScale (std::string newScale){
 std::vector<Note> Chord::returnNoteVector() {
     return noteList;
 }
+
+std::string Chord::returnKey(Note inputNote, bool major){
+    std::string outputString = "";
+    if (major == true){
+        return (inputNote.returnNoteName() + " Major"); 
+    } 
+    else if (major == false){
+        return (inputNote.returnNoteName() + " Minor");
+    }
+    return outputString;
+}

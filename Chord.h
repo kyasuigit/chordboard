@@ -16,6 +16,8 @@ class Chord{
         void removeNote (Note selectNote);
         void setScale (std::string newScale);
         std::vector<Note> returnNoteVector();
+        std::string returnKey(Note inputNote, bool major);
+
 };
 
 #endif // CHORD_H

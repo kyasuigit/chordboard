@@ -33,10 +33,15 @@ int main(){
 
     for (int j=0; j< minorChord.size(); j++){
         vector<Note> secondGey = minorChord.at(j).returnNoteVector();
-        
+        Note keyName("A", 8);
         for (unsigned x=0; x < secondGey.size(); x++){
+            if (x == 0){
+                keyName.changeNote(secondGey.at(0).returnNoteName());
+                keyName.changeOctave(secondGey.at(0).returnOctave());
+            }
             Note thisThing = secondGey.at(x);
-            std::cout << "Chord2 " << j << thisThing.returnNoteName() << std::endl;
+            std::cout << "Chord2 " << j << thisThing.returnNoteName() << minorChord.at(j).returnKey(keyName, false);
+            std::cout << endl;
         }
     }
         

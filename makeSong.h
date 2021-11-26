@@ -10,8 +10,8 @@ class makeSong{
 
     public:
         makeSong();
-        std::vector<Chord> findMajor(Chord inputChord);
-        std::vector<Chord> findMinor(Chord inputChord);
+        std::vector<Chord> makeMajor(Chord inputChord);
+        std::vector<Chord> makeMinor(Chord inputChord);
         Chord majorKey(Note inputNote, int inversion);
         Chord minorKey(Note inputNote, int inversion);
         int notePosition(Note inputNote);

@@ -277,3 +277,4 @@ Note findChord::posToNote(int position){
     }
     return returnedNote;
 };
+
