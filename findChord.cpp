@@ -46,6 +46,17 @@ Chord findChord::majorKey(Note inputNote, int inversion){
     Note thirdNote ("D", 0);
 
     int position = notePosition(inputNote);
+    int leftPosition = position;
+
+    Note firstLeft = inputNote;
+    Note secondLeft("C", 0);
+
+    if (inputNote.returnOctave() >= 3){
+        leftPosition = leftPosition - 12;
+        firstLeft = posToNote(leftPosition);
+        leftPosition = leftPosition - 12;
+        secondLeft = posToNote(leftPosition);
+    }
 
     // Base form
     if (inversion == 1){
@@ -81,13 +92,10 @@ Chord findChord::majorKey(Note inputNote, int inversion){
     // Make a new chord and add the notes to the chord
     Chord newNotes;
     newNotes.insertNote(firstNote);
-  
-
     newNotes.insertNote(secondNote);
     newNotes.insertNote(thirdNote);
-
-    // std::cout << newNote.returnNoteName() << endl;
-    // std::cout << secondNote.returnNoteName() << endl;
+    newNotes.insertNote(firstLeft);
+    newNotes.insertNote(secondLeft);
 
     // We will return a chord with the given notes in it.
     return newNotes;
@@ -121,7 +129,19 @@ Chord findChord::minorKey(Note inputNote, int inversion){
     Note secondNote ("C", 0);
     Note thirdNote ("D", 0);
 
+    //For left hand
+    Note firstLeft = inputNote;
+    Note secondLeft("C", 0);
+
     int position = notePosition(inputNote);
+    int leftPosition = position;
+
+    if (inputNote.returnOctave() >= 3){
+        leftPosition = leftPosition - 12;
+        firstLeft = posToNote(leftPosition);
+        leftPosition = leftPosition - 12;
+        secondLeft = posToNote(leftPosition);
+    }
 
     // Base form
     if (inversion == 1){
@@ -130,13 +150,7 @@ Chord findChord::minorKey(Note inputNote, int inversion){
         secondNote = posToNote(position);
         position = position + 4; 
         thirdNote = posToNote(position);
-        // std::cout << firstNote.returnNoteName();
-        // std::cout << secondNote.returnNoteName();
-        // std::cout << thirdNote.returnNoteName();
-
     }
-
-    // The following inversions need to be completed.
 
     // First Inversion
     else if (inversion == 2){
@@ -165,6 +179,8 @@ Chord findChord::minorKey(Note inputNote, int inversion){
     newNotes.insertNote(firstNote);
     newNotes.insertNote(secondNote);
     newNotes.insertNote(thirdNote);
+    newNotes.insertNote(firstLeft);
+    newNotes.insertNote(secondLeft);
 
     // std::cout << newNote.returnNoteName() << endl;
     // std::cout << secondNote.returnNoteName() << endl;
