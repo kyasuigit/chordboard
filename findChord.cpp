@@ -179,8 +179,9 @@ int findChord::notePosition(Note inputNote){
     std::string noteName = inputNote.returnNoteName();
     int octave = inputNote.returnOctave();
 
-    int ocativeMultiplier = octave-1;
+    int ocativeMultiplier = octave;
     ocativeMultiplier = ocativeMultiplier * 12;
+    // std:: cout << ocativeMultiplier;
 
     //Returns relative position, add equivalence classes for flats later
     if (noteName == "C"){
@@ -215,9 +216,9 @@ int findChord::notePosition(Note inputNote){
 
 Note findChord::posToNote(int position){
 
-    std::cout << position << endl;
+    // std::cout << position << endl;
+    int Octave = position / 12;
     position = position % 12;
-    int Octave = position % 12;
     std::string keyName;
     Note returnedNote ("Init", Octave);
 

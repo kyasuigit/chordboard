@@ -27,7 +27,7 @@ int main(){
         
         for (unsigned x=0; x < thisGay.size(); x++){
             Note thisThing = thisGay.at(x);
-            std::cout << "Chord " << i << thisThing.returnNoteName() << std::endl;
+            std::cout << "Chord " << i << thisThing.returnNoteName() << " " << thisThing.returnOctave() << std::endl;
         }    
     }
 
