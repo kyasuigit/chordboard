@@ -91,8 +91,8 @@ Chord findChord::majorKey(Note inputNote, int inversion){
 
     // Make a new chord and add the notes to the chord
     Chord newNotes;
-    newNotes.insertNote(firstLeft);
     newNotes.insertNote(secondLeft);
+    newNotes.insertNote(firstLeft);
     newNotes.insertNote(firstNote);
     newNotes.insertNote(secondNote);
     newNotes.insertNote(thirdNote);
@@ -177,8 +177,8 @@ Chord findChord::minorKey(Note inputNote, int inversion){
 
     // Make a new chord and add the notes to the chord
     Chord newNotes;
-    newNotes.insertNote(firstLeft);
     newNotes.insertNote(secondLeft);
+    newNotes.insertNote(firstLeft);
     newNotes.insertNote(firstNote);
     newNotes.insertNote(secondNote);
     newNotes.insertNote(thirdNote);
