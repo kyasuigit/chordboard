@@ -91,11 +91,12 @@ Chord findChord::majorKey(Note inputNote, int inversion){
 
     // Make a new chord and add the notes to the chord
     Chord newNotes;
+    newNotes.insertNote(firstLeft);
+    newNotes.insertNote(secondLeft);
     newNotes.insertNote(firstNote);
     newNotes.insertNote(secondNote);
     newNotes.insertNote(thirdNote);
-    newNotes.insertNote(firstLeft);
-    newNotes.insertNote(secondLeft);
+
 
     // We will return a chord with the given notes in it.
     return newNotes;
@@ -176,11 +177,12 @@ Chord findChord::minorKey(Note inputNote, int inversion){
 
     // Make a new chord and add the notes to the chord
     Chord newNotes;
+    newNotes.insertNote(firstLeft);
+    newNotes.insertNote(secondLeft);
     newNotes.insertNote(firstNote);
     newNotes.insertNote(secondNote);
     newNotes.insertNote(thirdNote);
-    newNotes.insertNote(firstLeft);
-    newNotes.insertNote(secondLeft);
+
 
     // std::cout << newNote.returnNoteName() << endl;
     // std::cout << secondNote.returnNoteName() << endl;
