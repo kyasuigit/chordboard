@@ -203,29 +203,29 @@ int findChord::notePosition(Note inputNote){
 
     //Returns relative position, add equivalence classes for flats later
     if (noteName == "C"){
-        return 1 + ocativeMultiplier;
-    } else if (noteName == "C#"){
-        return 2 + ocativeMultiplier;
-    } else if (noteName == "D"){
-        return 3 + ocativeMultiplier;
-    } else if (noteName == "D#"){
-        return 4 + ocativeMultiplier;
-    } else if (noteName == "E"){
-        return 5 + ocativeMultiplier;
-    } else if (noteName == "F"){
-        return 6 + ocativeMultiplier;
-    } else if (noteName == "F#"){
-        return 7 + ocativeMultiplier;
-    } else if (noteName == "G"){
-        return 8 + ocativeMultiplier;
-    } else if (noteName == "G#"){
-        return 9 + ocativeMultiplier;
-    } else if (noteName == "A"){
-        return 10 + ocativeMultiplier;
-    } else if (noteName == "A#"){
-        return 11 + ocativeMultiplier;
-    } else if (noteName == "B"){
         return 12 + ocativeMultiplier;
+    } else if (noteName == "C#"){
+        return 1 + ocativeMultiplier;
+    } else if (noteName == "D"){
+        return 2 + ocativeMultiplier;
+    } else if (noteName == "D#"){
+        return 3 + ocativeMultiplier;
+    } else if (noteName == "E"){
+        return 4 + ocativeMultiplier;
+    } else if (noteName == "F"){
+        return 5 + ocativeMultiplier;
+    } else if (noteName == "F#"){
+        return 6 + ocativeMultiplier;
+    } else if (noteName == "G"){
+        return 7 + ocativeMultiplier;
+    } else if (noteName == "G#"){
+        return 8 + ocativeMultiplier;
+    } else if (noteName == "A"){
+        return 9 + ocativeMultiplier;
+    } else if (noteName == "A#"){
+        return 10 + ocativeMultiplier;
+    } else if (noteName == "B"){
+        return 11 + ocativeMultiplier;
     }
 
     // Need to return something at the end just return some 13 + octiveMultiplier
