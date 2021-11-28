@@ -239,44 +239,44 @@ Note findChord::posToNote(int position){
     position = position % 12;
     std::string keyName;
     Note returnedNote ("Init", Octave);
-
-    if (position == 1){
+    
+    if (position == 0){
         returnedNote.changeNote("C");
-
-    } else if (position == 2){
+    }
+    else if (position == 1){
         returnedNote.changeNote("C#");
 
-    }  else if (position == 3){
+    } else if (position == 2){
         returnedNote.changeNote("D");
 
-    } else if (position == 4){
+    }  else if (position == 3){
         returnedNote.changeNote("D#");
 
-    } else if (position == 5){
+    } else if (position == 4){
         returnedNote.changeNote("E");
 
-    } else if (position == 6){
+    } else if (position == 5){
         returnedNote.changeNote("F");
 
-    } else if (position == 7){
+    } else if (position == 6){
         returnedNote.changeNote("F#");
 
-    } else if (position == 8){
+    } else if (position == 7){
         returnedNote.changeNote("G");
+
+    } else if (position == 8){
+        returnedNote.changeNote("G#");
         
     } else if (position == 9){
-        returnedNote.changeNote("G#");
-
-    } else if (position == 10){
         returnedNote.changeNote("A");
 
-    } else if (position == 11){
+    } else if (position == 10){
         returnedNote.changeNote("A#");
 
-    } else if (position == 0){
+    } else if (position == 11){
         returnedNote.changeNote("B");
-
     }
+ 
     return returnedNote;
 };
 
