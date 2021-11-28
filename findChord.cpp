@@ -193,6 +193,73 @@ Chord findChord::minorKey(Note inputNote, int inversion){
 
 };
 
+
+Chord findChord::makeSong(Note inputNote, std::string key, int length){
+    Note startingNote = Note("C", 4);
+    startingNote.changeNote(inputNote.returnNoteName());
+
+    Chord songNotes;
+
+    std::vector <Note> scaleNotes;
+
+    int notePos = notePosition(startingNote);
+
+    Note firstNote(startingNote);
+    Note secondNote(startingNote);
+    Note thirdNote(startingNote);
+    Note fourthNote(startingNote);
+    Note fifthNote(startingNote);
+    Note sixthNote(startingNote);
+    Note seventhNote(startingNote);
+
+    if (key == "major"){
+        notePos = notePos + 2;
+        secondNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        thirdNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 1;
+        fourthNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        fifthNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        sixthNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        seventhNote.changeNote(posToNote(notePos).returnNoteName());
+    }
+    else if (key == "minor"){
+        notePos = notePos + 2;
+        secondNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 1;
+        thirdNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        fourthNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        fifthNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        sixthNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 1;
+        seventhNote.changeNote(posToNote(notePos).returnNoteName());
+    }
+
+    scaleNotes.push_back(firstNote);
+    scaleNotes.push_back(secondNote);
+    scaleNotes.push_back(thirdNote);
+    scaleNotes.push_back(fourthNote);
+    scaleNotes.push_back(fifthNote);
+    scaleNotes.push_back(sixthNote);
+    scaleNotes.push_back(seventhNote);
+    srand(time(NULL));
+    for (int x = 0; x < length; x++){
+      
+        int randomNote = rand() % 6;
+        songNotes.insertNote(scaleNotes.at(randomNote));    
+        std::cout << scaleNotes.at(x).returnNoteName();
+    }
+
+    return songNotes;
+}
+
+
 int findChord::notePosition(Note inputNote){
     std::string noteName = inputNote.returnNoteName();
     int octave = inputNote.returnOctave();
@@ -279,4 +346,3 @@ Note findChord::posToNote(int position){
  
     return returnedNote;
 };
-
