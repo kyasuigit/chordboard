@@ -107,44 +107,47 @@ void drum_widget::on_checkBox_toggled(bool checked){
     openOrClosed = checked;
 }
 
-
+// This is used to generate the recommendations and display in the listwidget.
 void drum_widget::createRecommendations(){
     // We call our drum backend so we can get the recommendations.
     drum thisDrum;
-    std::vector <int> noteRecommendations = thisDrum.returnNotes();
-    for (int x= 0; x < (int)noteRecommendations.size(); x++){
-        switch (noteRecommendations[x]){
-            case 1:
-                recItem -> setText(recItem->text() + "closed_hihat  ");
-                break;
-            case 2:
-                recItem -> setText(recItem->text() + "open_hihat  ");
-                break;
-            case 3:
-                recItem -> setText(recItem->text() + "crash_cymbal  ");
-                break;
-            case 4:
-                recItem -> setText(recItem->text() + "snare  ");
-                break;
-            case 5:
-                recItem -> setText(recItem->text() + "hi_tom  ");
-                break;
-            case 6:
-                recItem -> setText(recItem->text() + "medium_tom  ");
-                break;
-            case 7:
-                recItem -> setText(recItem->text() + "ride_cymbal  ");
-                break;
-            case 8:
-                recItem -> setText(recItem->text() + "floor_tom  ");
-                break;
-            case 9:
-                recItem -> setText(recItem->text() + "bass_drum  ");
-                break;
-        }
-     }
-    // Add to the ui.
-    ui -> listWidget_2 ->addItem(recItem);
+    for (int y= 0; y < 3; y ++){
+        std::vector <int> noteRecommendations = thisDrum.returnNotes(5);
+        for (int x= 0; x < (int)noteRecommendations.size(); x++){
+            switch (noteRecommendations[x]){
+                case 1:
+                    recItem -> setText(recItem->text() + "closed_hihat  ");
+                    break;
+                case 2:
+                    recItem -> setText(recItem->text() + "open_hihat  ");
+                    break;
+                case 3:
+                    recItem -> setText(recItem->text() + "crash_cymbal  ");
+                    break;
+                case 4:
+                    recItem -> setText(recItem->text() + "snare  ");
+                    break;
+                case 5:
+                    recItem -> setText(recItem->text() + "hi_tom  ");
+                    break;
+                case 6:
+                    recItem -> setText(recItem->text() + "medium_tom  ");
+                    break;
+                case 7:
+                    recItem -> setText(recItem->text() + "ride_cymbal  ");
+                    break;
+                case 8:
+                    recItem -> setText(recItem->text() + "floor_tom  ");
+                    break;
+                case 9:
+                    recItem -> setText(recItem->text() + "bass_drum  ");
+                    break;
+            }
+         }
+        // Add to the ui.
+        ui -> listWidget_2 ->addItem(recItem);
+        recItem = new QListWidgetItem();
+    }
 }
 
 // This method will handle whether or not the user wishes to record their interactions with the system.
@@ -208,7 +211,7 @@ void drum_widget::on_pushButton_11_clicked(){
     }
 }
 
-
+// This is used for when the user wishes to play a recommendation.
 void drum_widget::on_listWidget_2_itemClicked(QListWidgetItem *item)
 {
     // We will grab the item's name, parse it, then, depending on the state of arpeggio, play with or without a delay.

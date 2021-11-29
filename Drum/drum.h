@@ -9,7 +9,7 @@ class drum{
 
     public:
         drum();
-        std::vector <int> returnNotes();
+        std::vector <int> returnNotes(int length);
         
 };
 
