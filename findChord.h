@@ -20,8 +20,10 @@ class findChord{
         int notePosition(Note inputNote);
         bool containsNote (Note inputNote, Chord inputChord);
         Note posToNote (int position);
-        Chord blowInstrumentsMajor(Note inputNote);
-        Chord blowInstrumentsMinor(Note inputNote);
+        Chord blowInstrumentsMajor(Note inputNote, int inversion);
+        Chord blowInstrumentsMinor(Note inputNote, int inversion);
+        std::vector<Chord> blowMajor(Chord inputChord);
+        std::vector<Chord> blowMinor(Chord inputChord);
 };
 
 #endif // FINDCHORD_H
