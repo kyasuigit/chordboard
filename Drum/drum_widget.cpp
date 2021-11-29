@@ -9,10 +9,8 @@ drum_widget::drum_widget(QWidget *parent) : QWidget(parent), ui(new Ui::drum_wid
     openOrClosed = false; // Determining if the hihat is closed or open.
     music = new QMediaPlayer();
 
-    // Initialize our dynamic string class. Allocate for one string.
-    historyArray = new std::string;
-
     recording = false; // Not recording right now.
+
 
     // We can have a string and continually add to it. This string will be used for creating the
     // qlistitem
@@ -24,7 +22,8 @@ drum_widget::~drum_widget()
 {
     delete ui;
     delete music; // Freeing memory from the music player
-    delete historyArray; // Freeing memory from the history array.
+    delete currentItem;
+    delete recItem;
 
 }
 
@@ -109,15 +108,60 @@ void drum_widget::on_checkBox_toggled(bool checked){
 }
 
 
+void drum_widget::createRecommendations(){
+    // We call our drum backend so we can get the recommendations.
+    drum thisDrum;
+    std::vector <int> noteRecommendations = thisDrum.returnNotes();
+    for (int x= 0; x < (int)noteRecommendations.size(); x++){
+        switch (noteRecommendations[x]){
+            case 1:
+                recItem -> setText(recItem->text() + "closed_hihat  ");
+                break;
+            case 2:
+                recItem -> setText(recItem->text() + "open_hihat  ");
+                break;
+            case 3:
+                recItem -> setText(recItem->text() + "crash_cymbal  ");
+                break;
+            case 4:
+                recItem -> setText(recItem->text() + "snare  ");
+                break;
+            case 5:
+                recItem -> setText(recItem->text() + "hi_tom  ");
+                break;
+            case 6:
+                recItem -> setText(recItem->text() + "medium_tom  ");
+                break;
+            case 7:
+                recItem -> setText(recItem->text() + "ride_cymbal  ");
+                break;
+            case 8:
+                recItem -> setText(recItem->text() + "floor_tom  ");
+                break;
+            case 9:
+                recItem -> setText(recItem->text() + "bass_drum  ");
+                break;
+        }
+     }
+    // Add to the ui.
+    ui -> listWidget_2 ->addItem(recItem);
+}
+
 // This method will handle whether or not the user wishes to record their interactions with the system.
 void drum_widget::on_radioButton_toggled(bool checked){
     if (checked == true){
+        ui -> radioButton -> setText("Recording...");
         recording = true;
         currentItem = new QListWidgetItem();
+        recItem = new QListWidgetItem();
     }
     else{
+        ui -> radioButton -> setText("Record");
         recording = false;
-        ui -> listWidget -> addItem (currentItem);
+        if (currentItem -> text() != NULL){
+            ui -> listWidget -> addItem (currentItem);
+            drum_widget::createRecommendations();
+        }
     }
 }
 
@@ -126,6 +170,7 @@ void drum_widget::on_checkBox_3_toggled(bool checked){
     arpeggio = checked;
 }
 
+// This handles the dealy that the system requires.
 void drum_widget::delay(int msec){
     QTime deadTime = QTime::currentTime().addMSecs(msec);
     while (QTime::currentTime() < deadTime)
@@ -161,5 +206,30 @@ void drum_widget::on_pushButton_11_clicked(){
         foreach (QListWidgetItem *items, items){
             delete ui->listWidget-> takeItem(ui->listWidget->row(items));
     }
+}
+
+
+void drum_widget::on_listWidget_2_itemClicked(QListWidgetItem *item)
+{
+    // We will grab the item's name, parse it, then, depending on the state of arpeggio, play with or without a delay.
+    QString str = item->text();
+    QRegExp rx ("[ ]");
+    QStringList newList = str.split (rx, QString::SkipEmptyParts);
+
+    for (int i = 0; i < newList.size(); i++){
+        if (arpeggio == true){
+            QSound::play ("qrc:/sound_files/" + newList.at(i) +  ".wav");
+            delay(100);
+        }
+        else{
+            QSound::play ("qrc:/sound_files/" + newList.at(i) +  ".wav");
+        }
+    }
+}
+
+
+void drum_widget::on_pushButton_10_clicked()
+{
+    ui -> listWidget_2 -> clear();
 }
 

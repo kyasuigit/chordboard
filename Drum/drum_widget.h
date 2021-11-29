@@ -17,6 +17,9 @@
 #include <QTimer>
 #include <QtAlgorithms>
 #include <QTime>
+#include "drum.h"
+#include <climits>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class drum_widget; }
@@ -60,6 +63,10 @@ private slots:
 
     void on_pushButton_11_clicked();
 
+    void on_listWidget_2_itemClicked(QListWidgetItem *item);
+
+    void on_pushButton_10_clicked();
+
 private:
     Ui::drum_widget *ui;
     // We can make custom methods here.
@@ -68,9 +75,6 @@ private:
 
     // We need a music player.
     QMediaPlayer *music;
-
-    // We need a dynamic array to hold the history.
-    std::string *historyArray;
 
     bool recording;
 
@@ -81,7 +85,9 @@ private:
     // This method will pause the execution of the entire program.
     void delay (int msec);
 
+    QListWidgetItem *recItem;
 
+    void createRecommendations();
 
 };
 #endif // DRUM_WIDGET_H
