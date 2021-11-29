@@ -260,6 +260,13 @@ Chord findChord::makeSong(Note inputNote, std::string key, int length){
     return songNotes;
 }
 
+Chord findChord::blowInstrumentsMajor(Note inputNote){
+
+}
+
+Chord findChord::blowInstrumentsMinor(Note inputNote){
+    
+}
 
 int findChord::notePosition(Note inputNote){
     std::string noteName = inputNote.returnNoteName();

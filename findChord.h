@@ -20,7 +20,8 @@ class findChord{
         int notePosition(Note inputNote);
         bool containsNote (Note inputNote, Chord inputChord);
         Note posToNote (int position);
-
+        Chord blowInstrumentsMajor(Note inputNote);
+        Chord blowInstrumentsMinor(Note inputNote);
 };
 
 #endif // FINDCHORD_H
