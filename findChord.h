@@ -20,7 +20,6 @@ class findChord{
         int notePosition(Note inputNote);
         bool containsNote (Note inputNote, Chord inputChord);
         Note posToNote (int position);
-      
 
 };
 

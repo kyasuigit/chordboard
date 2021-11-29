@@ -24,10 +24,14 @@ int main(){
 
     for (int i=0; i< majorChord.size(); i++){
         vector<Note> thisGay = majorChord.at(i).returnNoteVector();
-        
+        Note keyName("A", 8);
         for (unsigned x=0; x < thisGay.size(); x++){
             Note thisThing = thisGay.at(x);
-            // std::cout << "Chord " << i << thisThing.returnNoteName() << " " << thisThing.returnOctave() << std::endl;
+            if (x == 0){
+                keyName.changeNote(thisGay.at(0).returnNoteName());
+                keyName.changeOctave(thisGay.at(0).returnOctave());
+            }
+            std::cout << "Chord " << i << thisThing.returnNoteName() << " " << thisThing.returnOctave() << minorChord.at(i).returnKey(keyName, true) << std::endl;
         }    
     }
 
@@ -41,7 +45,7 @@ int main(){
             }
             Note thisThing = secondGey.at(x);
             // std::cout << "Chord2 " << j << thisThing.returnNoteName() << minorChord.at(j).returnKey(keyName, false);
-            std::cout << endl;
+            // std::cout << endl;
         }
     }
 

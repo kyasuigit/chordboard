@@ -38,6 +38,8 @@ std::vector<Chord> findChord::findMajor(Chord inputChord){
     return Chords;
 };
 
+
+
 Chord findChord::majorKey(Note inputNote, int inversion){
 
     // Just some random notes. These are the base notes that will be overrided later
@@ -192,7 +194,6 @@ Chord findChord::minorKey(Note inputNote, int inversion){
 
 
 };
-
 
 Chord findChord::makeSong(Note inputNote, std::string key, int length){
     Note startingNote = Note("C", 4);
