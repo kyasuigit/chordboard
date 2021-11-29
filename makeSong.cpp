@@ -20,17 +20,19 @@ std::vector<Chord> makeSong::makeMajor(Chord inputChord){
     
     // For the inputchord we will loop through the notes in the chord and
     // find all of the new chords.
+    srand(time(NULL));
     for (int i = 0; i < Notes.size(); i++){
         // Push the new chords to the vector, three chords per note
         for (int x = 1; x <= 3; x++){
-            Chords.push_back(majorKey (Notes[i], x));
+            Chords.push_back(majorKey (Notes[i]));
         }
     }
 
     return Chords;
 };
 
-Chord makeSong::majorKey(Note inputNote, int inversion){
+Chord makeSong::majorKey(Note inputNote){
+    int inversion = rand() % 3 + 1;
 
     // Just some random notes. These are the base notes that will be overrided later
     Note firstNote = inputNote;
@@ -102,11 +104,13 @@ std::vector<Chord> makeSong::makeMinor(Chord inputChord){
     std::vector <Chord> Chords;
     
     // For the inputchord we will loop through the notes in the chord and
-    // find all of the new chords.
+    // find all of the new chords.    
+    srand(time(NULL));
     for (int i = 0; i < Notes.size(); i++){
         // Push the new chords to the vector, three chords per note
         for (int x = 1; x <= 3; x++){
-            Chords.push_back(minorKey (Notes[i], x));
+            Chords.push_back(minorKey (Notes[i]));
+
         }
     }
 
@@ -114,7 +118,8 @@ std::vector<Chord> makeSong::makeMinor(Chord inputChord){
 
 };
 
-Chord makeSong::minorKey(Note inputNote, int inversion){
+Chord makeSong::minorKey(Note inputNote){
+    int inversion = rand() % 3 + 1; 
 
     // Just some random notes. These are the base notes that will be overrided later
     Note firstNote = inputNote;
@@ -173,9 +178,6 @@ Chord makeSong::minorKey(Note inputNote, int inversion){
     newNotes.insertNote(thirdNote);
     newNotes.insertNote(firstLeft);
     newNotes.insertNote(secondLeft);
-
-    // std::cout << newNote.returnNoteName() << endl;
-    // std::cout << secondNote.returnNoteName() << endl;
 
     // We will return a chord with the given notes in it.
     return newNotes;
@@ -269,3 +271,69 @@ Note makeSong::posToNote(int position){
     }
     return returnedNote;
 };
+
+
+Chord makeSong::createSong(Note inputNote, std::string key, int length){
+    Note startingNote = Note("C", 4);
+    startingNote.changeNote(inputNote.returnNoteName());
+
+    Chord songNotes;
+
+    std::vector <Note> scaleNotes;
+
+    int notePos = notePosition(startingNote);
+
+    Note firstNote(startingNote);
+    Note secondNote(startingNote);
+    Note thirdNote(startingNote);
+    Note fourthNote(startingNote);
+    Note fifthNote(startingNote);
+    Note sixthNote(startingNote);
+    Note seventhNote(startingNote);
+
+    if (key == "major"){
+        notePos = notePos + 2;
+        secondNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        thirdNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 1;
+        fourthNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        fifthNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        sixthNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        seventhNote.changeNote(posToNote(notePos).returnNoteName());
+    }
+    else if (key == "minor"){
+        notePos = notePos + 2;
+        secondNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 1;
+        thirdNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        fourthNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        fifthNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 2;
+        sixthNote.changeNote(posToNote(notePos).returnNoteName());
+        notePos = notePos + 1;
+        seventhNote.changeNote(posToNote(notePos).returnNoteName());
+    }
+
+    scaleNotes.push_back(firstNote);
+    scaleNotes.push_back(secondNote);
+    scaleNotes.push_back(thirdNote);
+    scaleNotes.push_back(fourthNote);
+    scaleNotes.push_back(fifthNote);
+    scaleNotes.push_back(sixthNote);
+    scaleNotes.push_back(seventhNote);
+    srand(time(NULL));
+    for (int x = 0; x < length; x++){
+      
+        int randomNote = rand() % 6;
+        songNotes.insertNote(scaleNotes.at(randomNote));    
+        std::cout << scaleNotes.at(x).returnNoteName();
+    }
+
+    return songNotes;
+}
