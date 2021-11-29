@@ -261,11 +261,50 @@ Chord findChord::makeSong(Note inputNote, std::string key, int length){
 }
 
 Chord findChord::blowInstrumentsMajor(Note inputNote){
+    Note firstNote = inputNote;
+    Note secondNote ("C", 0);
+    Note thirdNote ("D", 0);
 
+    int position = notePosition(inputNote);
+
+    // Major third
+    position = position + 4;
+    secondNote = posToNote(position);
+    position = position + 3;
+    thirdNote = posToNote(position);
+    
+    // Make a new chord and add the notes to the chord
+    Chord newNotes;
+    newNotes.insertNote(firstNote);
+    newNotes.insertNote(secondNote);
+    newNotes.insertNote(thirdNote);
+
+
+    // We will return a chord with the given notes in it.
+    return newNotes;
 }
 
 Chord findChord::blowInstrumentsMinor(Note inputNote){
+    Note firstNote = inputNote;
+    Note secondNote ("C", 0);
+    Note thirdNote ("D", 0);
+
+    int position = notePosition(inputNote);
+
+    // Major third
+    position = position + 3;
+    secondNote = posToNote(position);
+    position = position + 4;
+    thirdNote = posToNote(position);
     
+    // Make a new chord and add the notes to the chord
+    Chord newNotes;
+    newNotes.insertNote(firstNote);
+    newNotes.insertNote(secondNote);
+    newNotes.insertNote(thirdNote);
+
+    // We will return a chord with the given notes in it.
+    return newNotes;
 }
 
 int findChord::notePosition(Note inputNote){
