@@ -12,6 +12,7 @@
 #include "drum_widget.h"
 #include "trumpet_widget.h"
 #include "instrument_select.h"
+#include "widget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,6 +38,7 @@ private slots:
     void setUpPiano();
     void setUpDrum();
     void setUpTrumpet();
+    void setUpFlute();
     void on_btnExit_clicked();
     void on_btnInstrument_clicked();
     void instrument_changed();

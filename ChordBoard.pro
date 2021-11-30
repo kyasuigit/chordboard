@@ -25,7 +25,8 @@ SOURCES += \
     drum_widget.cpp \
     trumpet_widget.cpp \
     drum.cpp \
-    hintwindow.cpp
+    hintwindow.cpp \
+    widget.cpp
 
 HEADERS += \
     dialog.h \
@@ -39,7 +40,8 @@ HEADERS += \
     drum_widget.h \
     trumpet_widget.h \
     drum.h \
-    hintwindow.h
+    hintwindow.h \
+    widget.h
 
 
 FORMS += \
@@ -49,7 +51,8 @@ FORMS += \
     instrument_select.ui \
     drum_widget.ui \
     trumpet_widget.ui \
-    hintwindow.ui
+    hintwindow.ui \
+    widget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

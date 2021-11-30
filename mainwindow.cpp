@@ -34,6 +34,8 @@ void MainWindow::onAccept()
         this->setUpDrum();
     else if (this->instrType.toStdString() == "Trumpet")
         this->setUpTrumpet();
+    else if (this->instrType.toStdString() == "Flute")
+        this->setUpFlute();
 
     this->show();
 }
@@ -99,6 +101,26 @@ void MainWindow::setUpTrumpet()
 
 }
 
+void MainWindow::setUpFlute()
+{
+    if (ui->interfaceWidget->layout() != NULL) {
+        QLayoutItem* item;
+        while ((item = ui->interfaceWidget->layout()->takeAt( 0 )) != NULL)
+        {
+            delete item->widget();
+            delete item;
+        }
+        delete ui->interfaceWidget->layout();
+    }
+
+    this->setWindowTitle(QString(QString("ChordBoard - ") + this->instrType));
+
+    Widget *flute = new Widget();
+    QLayout *layout_4 =  new QVBoxLayout(ui->interfaceWidget);
+
+    layout_4->addWidget(flute->returnFluteWidget());
+}
+
 
 MainWindow::~MainWindow()
 {
@@ -142,10 +164,13 @@ void MainWindow::instrument_changed()
         this->setUpDrum();
     else if (newInstr == "Trumpet")
         this->setUpTrumpet();
+    else if (newInstr == "Flute")
+        this->setUpFlute();
 }
 
 void MainWindow::on_helpButton_clicked()
 {
-    QMessageBox::information(this, tr("Help"), tr("To use this application, please press the record button, then input a set of notes, and stop recording. You can click the output on the bottom to see the chords suggested, and play a sample song from that selection."), QMessageBox::Ok);
+    if (instrType == "Piano")
+       QMessageBox::information(this, tr("Help"), tr("To use this application, please press the record button, then input a set of notes, and stop recording. You can click the output on the bottom to see the chords suggested, and play a sample song from that selection."), QMessageBox::Ok);
 }
 

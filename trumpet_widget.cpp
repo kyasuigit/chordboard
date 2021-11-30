@@ -166,6 +166,7 @@ void trumpet_widget::on_stopButton_clicked()
 void trumpet_widget::on_clearButton_clicked()
 {
     ui->inputList->clear();
+    ui->outputList->clear();
 }
 
 void trumpet_widget::displayOutput(QString notes)
@@ -203,12 +204,25 @@ void trumpet_widget::displayOutput(QString notes)
     for (Chord i: output_list) {
         std::vector <Note> note_list = i.returnNoteVector();
         QString note_item = "";
+        int count = 0;
+        QString currentScale;
         for (Note j: note_list) {
+            count++;
             QString file = QString::fromStdString(j.returnNoteName()) + QString::number(j.returnOctave());
             if (QFile::exists(":/trumpet/assets/trumpet_" + file + ".wav")) {
                 note_item.append(QString::fromStdString(j.returnNoteName()) + QString::number(j.returnOctave()) + " ");
             }
+
+            if (count == 1) {
+                if (inputScale.contains("Major")) {
+                    currentScale = QString::fromStdString(i.returnKey(j, true));
+                }
+                else
+                    currentScale = QString::fromStdString(i.returnKey(j, false));
+                currentScale.replace(" ", "");
+            }
         }
+        note_item.append(currentScale);
         ui->outputList->addItem(note_item);
     }
 
@@ -218,11 +232,13 @@ void trumpet_widget::displayOutput(QString notes)
 void trumpet_widget::on_removeButton_clicked()
 {
     qDeleteAll(ui->inputList->selectedItems());
+    ui->outputList->clear();
 }
 
 
 void trumpet_widget::on_inputList_itemClicked(QListWidgetItem *item)
 {
+    ui->outputList->clear();
     QStringList notes = item->text().split(" ");
     for (int i = 0; i < notes.size(); i++) {
         if (QFile::exists(":/trumpet/assets/trumpet_" + notes.at(i) + ".wav")) {
@@ -232,6 +248,7 @@ void trumpet_widget::on_inputList_itemClicked(QListWidgetItem *item)
                 this->delay(1000);
         }
     }
+    displayOutput(item->text());
 }
 
 void trumpet_widget::delay(int msec)
@@ -315,11 +332,13 @@ void trumpet_widget::on_outputList_itemClicked(QListWidgetItem *item)
 {
     QStringList notes = item->text().split(" ");
     for (int i = 0; i < notes.size(); i++) {
-        if (QFile::exists(":/trumpet/assets/trumpet_" + notes.at(i) + ".wav")) {
-            QString file(":/trumpet/assets/trumpet_" + notes.at(i) + ".wav");
-            QSound::play(file);
-            if (arpeggio)
-                this->delay(1000);
+        if (notes.size() < 5) {
+            if (QFile::exists(":/trumpet/assets/trumpet_" + notes.at(i) + ".wav")) {
+                QString file(":/trumpet/assets/trumpet_" + notes.at(i) + ".wav");
+                QSound::play(file);
+                if (arpeggio)
+                    this->delay(1000);
+            }
         }
     }
 }
