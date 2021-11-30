@@ -221,10 +221,6 @@ Chord findChord::minorKey(Note inputNote, int inversion){
     newNotes.insertNote(secondNote);
     newNotes.insertNote(thirdNote);
 
-
-    // std::cout << newNote.returnNoteName() << endl;
-    // std::cout << secondNote.returnNoteName() << endl;
-
     // We will return a chord with the given notes in it.
     return newNotes;
 
@@ -247,6 +243,7 @@ Chord findChord::makeSong(Note inputNote, std::string key, int length){
     Note fourthNote(startingNote);
     Note fifthNote(startingNote);
     Note sixthNote(startingNote);
+
     Note seventhNote(startingNote);
 
     if (key == "major"){
@@ -290,7 +287,7 @@ Chord findChord::makeSong(Note inputNote, std::string key, int length){
       
         int randomNote = rand() % 6;
         songNotes.insertNote(scaleNotes.at(randomNote));    
-        std::cout << scaleNotes.at(x).returnNoteName();
+        std::cout << scaleNotes.at(randomNote).returnNoteName();
     }
 
     return songNotes;

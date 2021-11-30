@@ -141,7 +141,7 @@ void Widget::on_checkBox_toggled(bool checked){
 void Widget::delay(int msec){
     QTime deadTime = QTime::currentTime().addMSecs(msec);
     while (QTime::currentTime() < deadTime)
-        QCoreApplication::processEvents (QEventLoop::AllEvents, 100);
+        QCoreApplication::processEvents (QEventLoop::AllEvents, 1000);
 }
 
 // This will handle if the user has clicked on an item in the history.
@@ -219,6 +219,8 @@ void Widget::on_pushButton_4_clicked(){
             findChord *thisChord = new findChord ();
             Chord output=  thisChord -> makeSong(*thisNote, minorOrMajor, sizeOfSong);
 
+            std::cout<< thisNote->returnNoteName() << std::endl;
+
             std::vector <Note> thisVector = output.returnNoteVector();
 
             // Looping through the note vector and appending it to the item to add to the ui.
@@ -288,7 +290,7 @@ void Widget::on_pushButton_5_clicked(){
             if (arpeggio == true){
                 QSound::play (":/flute/assets/flute_" + newList.at(i) + "_1_forte_normal.wav");
                 // Randommizing..
-                int randomNumber = rand() % 400 + 1;
+                int randomNumber = 2000;
                 delay(randomNumber);
             }
             else{
@@ -296,7 +298,7 @@ void Widget::on_pushButton_5_clicked(){
             }
         }
         // Randomizing.
-        int randomNumber = rand() % 400 + 1;
+        int randomNumber = 2000;
         delay(randomNumber);
     }
 }
