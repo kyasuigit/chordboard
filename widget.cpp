@@ -1,23 +1,24 @@
 #include "widget.h"
 #include "ui_widget.h"
 
-Widget::Widget(QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::Widget)
-{
-    ui->setupUi(this);
+/// @file widget.cpp
+/// @brief This class is used to create and maintain a flute ui. It contains all the methods
+/// necessary to allow the user to play flute sounds, record flute notes, and maintain a histroy of flute notes.
+/// This class also implements the flute backend so the flute ui is able to display song recommendations given the note input.
+/// @authors Kevin Yang, Kohei Yasui
 
-    recording = false;
+
+Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget){
+    ui->setupUi(this);
+    recording = false; // Keeping track of recording.
 
     // Initialize the octave to 4.
     octave = 4;
+    arpeggio = false; // Keeping track of the arpeggio.
+    minorOrMajor = "minor"; // Keeping track if the user wishes to generate a major or minor song.
+    sizeOfSong = 0; // Keeping track of the song length.
 
-    arpeggio = false;
-
-    minorOrMajor = "minor";
-
-    sizeOfSong = 0;
-
+    // Elements to create and maintain the metronome.
     metronomeBpm = 60;
     isNew = true;
     init = true;
@@ -27,8 +28,8 @@ Widget::Widget(QWidget *parent)
     connect(timer, &QTimer::timeout, this, &Widget::playTick);
 }
 
-Widget::~Widget()
-{
+
+Widget::~Widget(){
     delete ui;
     delete currentItem;
     isNew = false;
@@ -36,28 +37,28 @@ Widget::~Widget()
 
 }
 
-QWidget *Widget::returnFluteWidget()
-{
+
+QWidget *Widget::returnFluteWidget(){
     return ui->fluteWidgetBox;
 }
 
 
-// This will handle if a specific item has been clicked in the note selection widget.
 void Widget::on_listWidget_itemClicked(QListWidgetItem *item){
-
+    // If the user has selected to record.
     if (recording){
-        currentItem -> setText (currentItem -> text() + item -> text() + "  ");
+        currentItem -> setText (currentItem -> text() + item -> text() + "  "); // Adding text to the current item.
     }
-    // We will grab the item and play the sound. If recording is on, we will add to the item list.
+    // We will grab the item and play the sound.
     QSound::play (":/flute/assets/flute_" + item -> text() + "_1_forte_normal.wav");
 }
 
-// If the combo box has been activated. This will need to call a function to build the listwidget that holds all the notes.
+
 void Widget::on_comboBox_activated(int index){
 
+    // Clear the list view so we can display a new list of notes in the given octave.
     ui->listWidget ->clear();
 
-    // Setting the octave.
+    // Setting the octave by grabbing the index. Each time, call the createList method.
     switch (index){
         case 1:
             octave = 4;
@@ -78,11 +79,12 @@ void Widget::on_comboBox_activated(int index){
     }
 }
 
-// This will create the listwidget given the octave.
-void Widget::createList (int octave){
 
+void Widget::createList (int octave){
+    // String vector for the notes. File reading was broken so this was the only workaround.
     std::vector <std::string> octaveArray;
 
+    // Generating the string vector.
     switch (octave){
         case 4:
             octaveArray = {"C4", "C#4", "Db4", "D4", "D#4", "Eb4", "E4", "F4", "F#4", "Gb4", "G4", "G#4", "Ab4", "A4", "A#4", "Bb4", "B4"};
@@ -98,6 +100,7 @@ void Widget::createList (int octave){
             break;
     }
 
+    // Making a new item to store the notes.
     QListWidgetItem *newItem = new QListWidgetItem();
 
     // Adding to the listwidget.
@@ -107,54 +110,57 @@ void Widget::createList (int octave){
         newItem = new QListWidgetItem();
     }
 
-    delete (newItem);
+    delete (newItem); // Freeing memory from the item created.
 }
 
-// This will handle if the user wishes to record their interaction with the system.
-void Widget::on_radioButton_toggled(bool checked){
-    if (checked){
-        currentItem = new QListWidgetItem;
-        recording = true;
-        ui -> radioButton -> setText("Recording...");
-    }
 
+void Widget::on_radioButton_toggled(bool checked){
+    // If the user has selected to record.
+    if (checked){
+        currentItem = new QListWidgetItem; // Create a new current item.
+        recording = true; // Set recording to true.
+        ui -> radioButton -> setText("Recording..."); // Change the name of the toggle.
+    }
+    // Otherwise the user wishes to stop recording.
     else{
             ui -> radioButton -> setText("Record");
             recording = false;
+            // Add the item to the view if it is not empty.
             if (currentItem -> text() != NULL){
                 ui -> listWidget_2 -> addItem(currentItem);
         }
     }
 }
 
-// Clearing the history.
+
 void Widget::on_pushButton_2_clicked(){
     ui -> listWidget_2 -> clear();
 }
 
-// Handling the arpeggio.
+
 void Widget::on_checkBox_toggled(bool checked){
     arpeggio = checked;
 }
 
-// This handles the dealy that the system requires.
+
 void Widget::delay(int msec){
     QTime deadTime = QTime::currentTime().addMSecs(msec);
     while (QTime::currentTime() < deadTime)
         QCoreApplication::processEvents (QEventLoop::AllEvents, 1000);
 }
 
-// This will handle if the user has clicked on an item in the history.
+
 void Widget::on_listWidget_2_itemClicked(QListWidgetItem *item){
     // We will grab the item's name, parse it, then, depending on the state of arpeggio, play with or without a delay.
     QString str = item->text();
     QRegExp rx ("[ ]");
     QStringList newList = str.split (rx, QString::SkipEmptyParts);
 
+    // Looping through the notes in the history item and playing the notes.
     for (int i = 0; i < newList.size(); i++){
         if (arpeggio == true){
             QSound::play (":/flute/assets/flute_" + newList.at(i) + "_1_forte_normal.wav");
-            delay(100);
+            delay(400);
         }
         else{
             QSound::play (":/flute/assets/flute_" + newList.at(i) + "_1_forte_normal.wav");
@@ -162,16 +168,16 @@ void Widget::on_listWidget_2_itemClicked(QListWidgetItem *item){
     }
 }
 
-// Handling when the user wishes to delete a single item from the history.
+
 void Widget::on_pushButton_clicked(){
     QList<QListWidgetItem*> items = ui->listWidget_2 ->selectedItems();
+    // For each selected item, delete it from the history QListWidget.
     foreach (QListWidgetItem *items, items){
         delete ui->listWidget_2-> takeItem(ui->listWidget_2->row(items));
     }
 }
 
 
-// Handling if the user has selected a major or minor chord song recommendation.
 void Widget::on_comboBox_2_activated(int index){
     switch (index){
         case 0:
@@ -183,17 +189,13 @@ void Widget::on_comboBox_2_activated(int index){
     }
 }
 
-// Handling if the user wishes to generate a new song recommendation.
-// This method needs a lot of work...
+
 void Widget::on_pushButton_4_clicked(){
-
-    // For now just hardcode to test functionality.
-
-    // Class seems to "work" for the most part
 
     // Grab the selected history item and make some recommendations
     QList<QListWidgetItem*> items = ui->listWidget_2 ->selectedItems();
 
+    // For each item in the history item.
     foreach (QListWidgetItem *items, items){
 
         QString str = items ->text();
@@ -203,24 +205,25 @@ void Widget::on_pushButton_4_clicked(){
         // For each note in the given history item
         for (int i = 0; i < newList.size(); i++){
 
+            // Create a pointer so we can grab the octave of the note.
             const QString *pointer = &newList.at(i);
 
             QListWidgetItem * listItem = new QListWidgetItem;
 
             // We need to chop off the end of the string so we only have the ending portion.
-            // This octave selection is really just not it brotha.
             QStringRef valueOfOctave = pointer -> rightRef(1);
 
-            // This changes the entire string as a whole.
+           // Generate a new Qstring that has only the note.
            QString noteString = (QString::fromStdString(newList.at(i).toStdString())).chopped(2);
 
+           // Creating a new note with the given parameters.
             Note *thisNote = new Note (noteString.toStdString(), valueOfOctave.toInt());
 
+            // Creating a new chord and calling the make song method.
             findChord *thisChord = new findChord ();
             Chord output=  thisChord -> makeSong(*thisNote, minorOrMajor, sizeOfSong);
 
-            std::cout<< thisNote->returnNoteName() << std::endl;
-
+            // Create a vector of notes that  takes in the note vector from the method.
             std::vector <Note> thisVector = output.returnNoteVector();
 
             // Looping through the note vector and appending it to the item to add to the ui.
@@ -232,18 +235,21 @@ void Widget::on_pushButton_4_clicked(){
                      listItem -> setText (listItem -> text() + QString::fromStdString(thisVector.at(x).returnNoteName()) +  QString::number(valueOfOctave.toInt()) + " ");
                   }
                 else{
+                    // Otherwise just continue.
                     continue;
                 }
             }
 
             if (listItem -> text() != NULL){
-                // Item is just not being added to literally anything for some reason
+                // Item is added only if it is not empty.
                 ui->listWidget_3->addItem (listItem);
             }
 
+            // Making a new copy in memory.
             listItem = new QListWidgetItem;
             thisChord = new findChord ();
 
+            // Freeing memory so we don't have any leaks.
             delete (listItem);
             delete (thisNote);
             delete (thisChord);
@@ -251,22 +257,23 @@ void Widget::on_pushButton_4_clicked(){
     }
 }
 
-// Handles the toggle for how long the usser wishes the song to be.
+
 void Widget::on_spinBox_valueChanged(int arg1){
     sizeOfSong = arg1;
 }
 
-// Handling if the user has clicked on one of the recommendation items
+
 void Widget::on_listWidget_3_itemClicked(QListWidgetItem *item){
     // We will grab the item's name, parse it, then, depending on the state of arpeggio, play with or without a delay.
     QString str = item->text();
     QRegExp rx ("[ ]");
     QStringList newList = str.split (rx, QString::SkipEmptyParts);
 
+    // For each note in the section, play the note.
     for (int i = 0; i < newList.size(); i++){
         if (arpeggio == true){
             QSound::play (":/flute/assets/flute_" + newList.at(i) + "_1_forte_normal.wav");
-            delay(100);
+            delay(400);
         }
         else{
             QSound::play (":/flute/assets/flute_" + newList.at(i) + "_1_forte_normal.wav");
@@ -274,7 +281,7 @@ void Widget::on_listWidget_3_itemClicked(QListWidgetItem *item){
     }
 }
 
-// If the user wishes to play all the sounds in the recommendation list to form a sample song.
+
 void Widget::on_pushButton_5_clicked(){
 
     // Loop through all items and grab the list items and play the sounds.
@@ -286,10 +293,11 @@ void Widget::on_pushButton_5_clicked(){
         QRegExp rx ("[ ]");
         QStringList newList = str.split (rx, QString::SkipEmptyParts);
 
+        // Looping through each item.
         for (int i = 0; i < newList.size(); i++){
             if (arpeggio == true){
                 QSound::play (":/flute/assets/flute_" + newList.at(i) + "_1_forte_normal.wav");
-                // Randommizing..
+                // Playing with a larger delay.
                 int randomNumber = 2000;
                 delay(randomNumber);
             }
@@ -297,23 +305,25 @@ void Widget::on_pushButton_5_clicked(){
                 QSound::play (":/flute/assets/flute_" + newList.at(i) + "_1_forte_normal.wav");
             }
         }
-        // Randomizing.
+        // Play with a large delay.
         int randomNumber = 2000;
         delay(randomNumber);
     }
 }
 
-// Handling if the recommendations list needs to be cleared.
+
 void Widget::on_pushButton_3_clicked(){
     ui -> listWidget_3  ->clear();
 }
 
 
-
 void Widget::on_pushButton_6_clicked(){
+
+    // Opening an image in the helpbox.
     QPixmap pm(":/flute/assets/flute_hint.jpg");
     QMessageBox helpBox;
 
+    // Setting the title and executing the window.
     helpBox.setWindowTitle("Flute Help");
     helpBox.setStandardButtons (QMessageBox::Ok);
     helpBox.setIconPixmap(pm);
@@ -322,8 +332,7 @@ void Widget::on_pushButton_6_clicked(){
 }
 
 
-void Widget::on_metronomeButton_toggled(bool checked)
-{
+void Widget::on_metronomeButton_toggled(bool checked){
     if (checked) {
         ui->metronomeButton->setText("On");
         float bpm = 60.0 / metronomeBpm * 1000;
@@ -340,13 +349,12 @@ void Widget::on_metronomeButton_toggled(bool checked)
 }
 
 
-void Widget::on_bpmSlider_sliderMoved(int position)
-{
+void Widget::on_bpmSlider_sliderMoved(int position){
     metronomeBpm = position;
 }
 
-void Widget::playTick()
-{
+
+void Widget::playTick(){
     static QSound *ticker;
     if (!isNew) {
         delete ticker;
