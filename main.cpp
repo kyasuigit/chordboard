@@ -5,11 +5,11 @@
 int main(){
     // Creates a chord and note 
     Chord testChord("Major");
-    Note middleC("C", 4);
-    Note middleE("E", 4);
+    Note middleC("F#", 6);
+    Note middleB("E", 6);
     
     testChord.insertNote(middleC);
-    testChord.insertNote(middleE);
+    testChord.insertNote(middleB);
     
     findChord tryMajor(testChord);
 
@@ -31,7 +31,7 @@ int main(){
                 keyName.changeNote(thisGay.at(0).returnNoteName());
                 keyName.changeOctave(thisGay.at(0).returnOctave());
             }
-            std::cout << "Chord " << i << thisThing.returnNoteName() << " " << thisThing.returnOctave() << minorChord.at(i).returnKey(keyName, true) << std::endl;
+            // std::cout << "Chord " << i << thisThing.returnNoteName() << " " << thisThing.returnOctave() << minorChord.at(i).returnKey(keyName, true) << std::endl;
         }    
     }
 
@@ -49,7 +49,8 @@ int main(){
         }
     }
 
-    vector <Note> songVector = tryMajor.makeSong(middleC, "major", 6).returnNoteVector();
+    vector <Note> songVector = tryMajor.makeSong(middleC, "minor", 5).returnNoteVector();
+    vector <Note> secondSongVector = tryMajor.makeSong(middleB, "minor", 5).returnNoteVector();
 
     for (int i = 0; i < songVector.size(); i++){
         std::cout << songVector.at(i).returnNoteName();
@@ -57,6 +58,10 @@ int main(){
 
     std::cout << std::endl;
 
+    for (int i = 0; i < songVector.size(); i++){
+        std::cout << secondSongVector.at(i).returnNoteName();
+    }
+    std::cout << std::endl;
         
     return 0;
 }

@@ -24,15 +24,14 @@ std::vector<Chord> makeSong::makeMajor(Chord inputChord){
     for (int i = 0; i < Notes.size(); i++){
         // Push the new chords to the vector, three chords per note
         for (int x = 1; x <= 3; x++){
-            Chords.push_back(majorKey (Notes[i]));
+            Chords.push_back(majorKey (Notes[i], x));
         }
     }
 
     return Chords;
 };
 
-Chord makeSong::majorKey(Note inputNote){
-    int inversion = rand() % 3 + 1;
+Chord makeSong::majorKey(Note inputNote, int inversion){
 
     // Just some random notes. These are the base notes that will be overrided later
     Note firstNote = inputNote;
@@ -85,7 +84,7 @@ Chord makeSong::majorKey(Note inputNote){
 
     // Make a new chord and add the notes to the chord
     Chord newNotes;
-    newNotes.insertNote(firstNote);
+    newNotes.insertNote(firstNote); 
     newNotes.insertNote(secondNote);
     newNotes.insertNote(thirdNote);
     newNotes.insertNote(firstLeft);
@@ -109,7 +108,7 @@ std::vector<Chord> makeSong::makeMinor(Chord inputChord){
     for (int i = 0; i < Notes.size(); i++){
         // Push the new chords to the vector, three chords per note
         for (int x = 1; x <= 3; x++){
-            Chords.push_back(minorKey (Notes[i]));
+            Chords.push_back(minorKey (Notes[i], x));
 
         }
     }
@@ -118,7 +117,7 @@ std::vector<Chord> makeSong::makeMinor(Chord inputChord){
 
 };
 
-Chord makeSong::minorKey(Note inputNote){
+Chord makeSong::minorKey(Note inputNote, int inversion){
     int inversion = rand() % 3 + 1; 
 
     // Just some random notes. These are the base notes that will be overrided later
