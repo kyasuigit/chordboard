@@ -3,6 +3,7 @@
         <file>drum_topdown_graphicx.jpg</file>
         <file>another_drum.jpg</file>
         <file>more_drums.jpg</file>
+        <file>Parts-of-a-drum-set.png</file>
     </qresource>
     <qresource prefix="/sound_files">
         <file>snare.wav</file>

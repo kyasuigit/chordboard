@@ -12,14 +12,19 @@ QMAKE_CXXFLAGS += -Wno-deprecated-copy
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    drum.cpp \
+    hintwindow.cpp \
     main.cpp \
     drum_widget.cpp
 
 HEADERS += \
-    drum_widget.h
+    drum.h \
+    drum_widget.h \
+    hintwindow.h
 
 FORMS += \
-    drum_widget.ui
+    drum_widget.ui \
+    hintwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

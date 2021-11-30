@@ -11,10 +11,6 @@ drum_widget::drum_widget(QWidget *parent) : QWidget(parent), ui(new Ui::drum_wid
 
     recording = false; // Not recording right now.
 
-
-    // We can have a string and continually add to it. This string will be used for creating the
-    // qlistitem
-
     arpeggio = false;
 }
 
@@ -24,7 +20,6 @@ drum_widget::~drum_widget()
     delete music; // Freeing memory from the music player
     delete currentItem;
     delete recItem;
-
 }
 
 // This is the hihat button slot.
@@ -112,7 +107,7 @@ void drum_widget::createRecommendations(){
     // We call our drum backend so we can get the recommendations.
     drum thisDrum;
     for (int y= 0; y < 3; y ++){
-        std::vector <int> noteRecommendations = thisDrum.returnNotes(5);
+        std::vector <int> noteRecommendations = thisDrum.returnNotes(7);
         for (int x= 0; x < (int)noteRecommendations.size(); x++){
             switch (noteRecommendations[x]){
                 case 1:
@@ -230,9 +225,40 @@ void drum_widget::on_listWidget_2_itemClicked(QListWidgetItem *item)
     }
 }
 
-
-void drum_widget::on_pushButton_10_clicked()
-{
+// Clearing all of the recommendations.
+void drum_widget::on_pushButton_10_clicked(){
     ui -> listWidget_2 -> clear();
+}
+
+// Handles if the user wishes to play all of the sounds rofm the recommendation qlistwidget.
+void drum_widget::on_pushButton_12_clicked(){
+    // Loop through all items and grab the list items and play the sounds.
+    for (int x =0; x < ui->listWidget_2->count(); x++){
+        QListWidgetItem *item = ui -> listWidget_2 -> item(x);
+
+        // We will grab the item's name, parse it, then, depending on the state of arpeggio, play with or without a delay.
+        QString str = item->text();
+        QRegExp rx ("[ ]");
+        QStringList newList = str.split (rx, QString::SkipEmptyParts);
+
+        for (int i = 0; i < newList.size(); i++){
+            if (arpeggio == true){
+                QSound::play ("qrc:/sound_files/" + newList.at(i) +  ".wav");
+                delay(100);
+            }
+            else{
+                QSound::play ("qrc:/sound_files/" + newList.at(i) +  ".wav");
+            }
+        }
+        delay(100);
+    }
+}
+
+
+// Handling if a new UI needs to be made. This will call the other window.
+void drum_widget::on_pushButton_13_clicked(){
+    hintWindow newWindow;
+    newWindow.setModal(true);
+    newWindow.exec();
 }
 

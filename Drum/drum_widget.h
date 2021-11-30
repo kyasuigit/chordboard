@@ -19,7 +19,7 @@
 #include <QTime>
 #include "drum.h"
 #include <climits>
-
+#include "hintwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class drum_widget; }
@@ -66,6 +66,10 @@ private slots:
     void on_listWidget_2_itemClicked(QListWidgetItem *item);
 
     void on_pushButton_10_clicked();
+
+    void on_pushButton_12_clicked();
+
+    void on_pushButton_13_clicked();
 
 private:
     Ui::drum_widget *ui;
