@@ -52,9 +52,10 @@ int main(){
     vector <Note> songVector = tryMajor.makeSong(middleC, "major", 6).returnNoteVector();
 
     for (int i = 0; i < songVector.size(); i++){
-        std::cout << songVector.at(i).returnNoteName() << endl;
+        std::cout << songVector.at(i).returnNoteName();
     }
 
+    std::cout << std::endl;
 
         
     return 0;

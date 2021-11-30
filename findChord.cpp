@@ -287,7 +287,7 @@ Chord findChord::makeSong(Note inputNote, std::string key, int length){
       
         int randomNote = rand() % 6;
         songNotes.insertNote(scaleNotes.at(randomNote));    
-        std::cout << scaleNotes.at(randomNote).returnNoteName();
+        // std::cout << scaleNotes.at(randomNote).returnNoteName();
     }
 
     return songNotes;
