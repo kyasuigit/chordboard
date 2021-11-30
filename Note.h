@@ -10,8 +10,10 @@ class Note{
         int octave;
 
     public:
-        Note (std::string name, int oct);
+        Note();
+        Note(std::string name, int oct);
         std::string returnNoteName();
+        void changeNoteName(std::string newName);
         int returnOctave();
         void changeOctave(int newOctave);
 };
