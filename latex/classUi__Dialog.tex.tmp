@@ -1,0 +1,44 @@
+\hypertarget{classUi__Dialog}{}\section{Ui\+\_\+\+Dialog Class Reference}
+\label{classUi__Dialog}\index{Ui\+\_\+\+Dialog@{Ui\+\_\+\+Dialog}}
+
+
+Inheritance diagram for Ui\+\_\+\+Dialog\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classUi__Dialog_a4f6a478c3ecdafabffb17b39cb26444a}\label{classUi__Dialog_a4f6a478c3ecdafabffb17b39cb26444a}} 
+void {\bfseries setup\+Ui} (Q\+Dialog $\ast$Dialog)
+\item 
+\mbox{\Hypertarget{classUi__Dialog_afa0ccb6f716ca6178260522a193c250e}\label{classUi__Dialog_afa0ccb6f716ca6178260522a193c250e}} 
+void {\bfseries retranslate\+Ui} (Q\+Dialog $\ast$Dialog)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classUi__Dialog_a02f973813b741621c5461918b3d9d4bb}\label{classUi__Dialog_a02f973813b741621c5461918b3d9d4bb}} 
+Q\+V\+Box\+Layout $\ast$ {\bfseries vertical\+Layout}
+\item 
+\mbox{\Hypertarget{classUi__Dialog_a72223b47393b202a023960c47082eb20}\label{classUi__Dialog_a72223b47393b202a023960c47082eb20}} 
+Q\+Label $\ast$ {\bfseries welcome\+Label}
+\item 
+\mbox{\Hypertarget{classUi__Dialog_a06f2d94a7aceed732d557774892c5f00}\label{classUi__Dialog_a06f2d94a7aceed732d557774892c5f00}} 
+Q\+Label $\ast$ {\bfseries select\+Label}
+\item 
+\mbox{\Hypertarget{classUi__Dialog_a5272f4a31affb22b7118cd47e5a96002}\label{classUi__Dialog_a5272f4a31affb22b7118cd47e5a96002}} 
+Q\+Spacer\+Item $\ast$ {\bfseries vertical\+Spacer}
+\item 
+\mbox{\Hypertarget{classUi__Dialog_ae66a1da203f045e33d71ed5abd46d2a1}\label{classUi__Dialog_ae66a1da203f045e33d71ed5abd46d2a1}} 
+Q\+H\+Box\+Layout $\ast$ {\bfseries horizontal\+Layout}
+\item 
+\mbox{\Hypertarget{classUi__Dialog_a2863ab4d879124c4cdc29295ff6e1320}\label{classUi__Dialog_a2863ab4d879124c4cdc29295ff6e1320}} 
+Q\+Combo\+Box $\ast$ {\bfseries instrument\+Combo}
+\item 
+\mbox{\Hypertarget{classUi__Dialog_ac0c334b8b3cf63707b26341a36428eeb}\label{classUi__Dialog_ac0c334b8b3cf63707b26341a36428eeb}} 
+Q\+Push\+Button $\ast$ {\bfseries go\+Button}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ui\+\_\+dialog.\+h\end{DoxyCompactItemize}
