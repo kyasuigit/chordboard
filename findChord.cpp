@@ -1,43 +1,32 @@
 #include "findChord.h"
 #include <algorithm>
 
-
-using namespace std;
-
-// Constructor for the class.
-
+// Constructor of findChord
 findChord::findChord(){
 
 }
 
-// Constructor
-
-findChord::findChord (Chord inputChord){
-
-    // Vector of notes.
-    // std::vector <Note> Notes = inputChord.returnNoteVector();
-}
-
-// This needs to return a vector of chords not a chord itself.
+// Method returns a vector of chords in a major scale given a chord input
 std::vector<Chord> findChord::findMajor(Chord inputChord){
     int chordSize = inputChord.returnNoteVector().size();
     std::vector<Note> Notes = inputChord.returnNoteVector();
-    // Chord existingNotes;
-
     std::vector <Chord> Chords;
     
     // For the inputchord we will loop through the notes in the chord and
     // find all of the new chords.
     for (int i = 0; i < Notes.size(); i++){
+
         // Push the new chords to the vector, three chords per note
         for (int x = 1; x <= 3; x++){
             Chords.push_back(majorKey (Notes[i], x));
         }
     }
 
+    // Returns the chord
     return Chords;
 };
 
+// Method returns a chord given an inpute note and inversion in a major scale
 Chord findChord::majorKey(Note inputNote, int inversion){
 
     // Just some random notes. These are the base notes that will be overrided later
@@ -45,12 +34,14 @@ Chord findChord::majorKey(Note inputNote, int inversion){
     Note secondNote ("C", 0);
     Note thirdNote ("D", 0);
 
+    // Initializes left hand and position of notes
     int position = notePosition(inputNote);
     int leftPosition = position;
 
     Note firstLeft = inputNote;
     Note secondLeft("C", 0);
 
+    // Returns accompanying left hand notes
     if (inputNote.returnOctave() >= 3){
         leftPosition = leftPosition - 12;
         firstLeft = posToNote(leftPosition);
@@ -58,18 +49,15 @@ Chord findChord::majorKey(Note inputNote, int inversion){
         secondLeft = posToNote(leftPosition);
     }
 
-    // Base form
+    // Base position of a major triad, notes added to first chord to be returned 
     if (inversion == 1){
-    // Major third
     position = position + 4;
     secondNote = posToNote(position);
     position = position + 3;
     thirdNote = posToNote(position);
     }
 
-    // The following inversions need to be completed.
-
-    // First Inversion
+    // First Inversion of the major triad, notes added to second chord to be returned
     else if (inversion == 2){
         position = position + 4;
         firstNote = posToNote(position);
@@ -79,7 +67,7 @@ Chord findChord::majorKey(Note inputNote, int inversion){
         thirdNote = posToNote(position);
     }
 
-    // // Second Inversion
+    // Second inversion of the major triad, notes added to the third chord to be returned
     else if (inversion == 3){
         position = position + 7;
         firstNote = posToNote(position);
@@ -89,7 +77,7 @@ Chord findChord::majorKey(Note inputNote, int inversion){
         thirdNote = posToNote(position);
     }
 
-    // Make a new chord and add the notes to the chord
+    // Make a new chord and add the determined notes to the chord
     Chord newNotes;
     newNotes.insertNote(secondLeft);
     newNotes.insertNote(firstLeft);
@@ -103,11 +91,10 @@ Chord findChord::majorKey(Note inputNote, int inversion){
 
 };
 
+// Method returns a vector of chords in a major scale given an input chord for trumpet and flute
 std::vector<Chord> findChord::blowMajor(Chord inputChord){
     int chordSize = inputChord.returnNoteVector().size();
     std::vector<Note> Notes = inputChord.returnNoteVector();
-    // Chord existingNotes;
-
     std::vector <Chord> Chords;
     
     // For the inputchord we will loop through the notes in the chord and
@@ -119,14 +106,16 @@ std::vector<Chord> findChord::blowMajor(Chord inputChord){
         }
     }
 
+    // Returns chords
     return Chords;
 }
 
+// Method returns a vector of chords in a minor scale given an input chord for trumpet and flute
 std::vector<Chord> findChord::blowMinor(Chord inputChord){
+    
+    // Initializes variables
     int chordSize = inputChord.returnNoteVector().size();
     std::vector<Note> Notes = inputChord.returnNoteVector();
-    // Chord existingNotes;
-
     std::vector <Chord> Chords;
     
     // For the inputchord we will loop through the notes in the chord and
@@ -138,14 +127,14 @@ std::vector<Chord> findChord::blowMinor(Chord inputChord){
         }
     }
 
+    // Returns the chords
     return Chords;
 }
 
+// Method returns a vector of chords in a major scale given an input chord
 std::vector<Chord> findChord::findMinor(Chord inputChord){
-  int chordSize = inputChord.returnNoteVector().size();
+    int chordSize = inputChord.returnNoteVector().size();
     std::vector<Note> Notes = inputChord.returnNoteVector();
-    // Chord existingNotes;
-
     std::vector <Chord> Chords;
     
     // For the inputchord we will loop through the notes in the chord and
@@ -157,10 +146,11 @@ std::vector<Chord> findChord::findMinor(Chord inputChord){
         }
     }
 
+    // Returns chords
     return Chords;
-
 };
 
+// Method returns a chord in a minor scale given an input note and inversion
 Chord findChord::minorKey(Note inputNote, int inversion){
 
     // Just some random notes. These are the base notes that will be overrided later
@@ -172,9 +162,11 @@ Chord findChord::minorKey(Note inputNote, int inversion){
     Note firstLeft = inputNote;
     Note secondLeft("C", 0);
 
+    // Initializes integer representation of positions
     int position = notePosition(inputNote);
     int leftPosition = position;
 
+    // Creates accompanying left hand notes
     if (inputNote.returnOctave() >= 3){
         leftPosition = leftPosition - 12;
         firstLeft = posToNote(leftPosition);
@@ -182,16 +174,15 @@ Chord findChord::minorKey(Note inputNote, int inversion){
         secondLeft = posToNote(leftPosition);
     }
 
-    // Base form
+    // Base position of a mionr triad, notes added to first chord to be returned 
     if (inversion == 1){
-    // Major third
         position = position + 3;
         secondNote = posToNote(position);
         position = position + 4; 
         thirdNote = posToNote(position);
     }
 
-    // First Inversion
+    // First Inversion of the minor triad, notes added to second chord to be returned
     else if (inversion == 2){
         position = position + 3;
         firstNote = posToNote(position);
@@ -199,10 +190,9 @@ Chord findChord::minorKey(Note inputNote, int inversion){
         secondNote = posToNote(position);
         position = position + 5; 
         thirdNote = posToNote(position);
-        // std::cout << "second-inversion ";
     }
 
-    // // Second Inversion
+    // Second inversion of the minor triad, notes added to the third chord to be returned
     else if (inversion == 3){
         position = position + 7;
         firstNote = posToNote(position);
@@ -210,7 +200,6 @@ Chord findChord::minorKey(Note inputNote, int inversion){
         secondNote = posToNote(position);
         position = position + 3;
         thirdNote = posToNote(position);
-        // std::cout << "third-inversion ";
     }
 
     // Make a new chord and add the notes to the chord
@@ -224,28 +213,28 @@ Chord findChord::minorKey(Note inputNote, int inversion){
     // We will return a chord with the given notes in it.
     return newNotes;
 
-
 };
 
+// Method returns a chord representing a song given an input note, key, and length
 Chord findChord::makeSong(Note inputNote, std::string key, int length){
     Note startingNote = Note("C", 4);
     startingNote.changeNote(inputNote.returnNoteName());
 
+    // Initializes variables
     Chord songNotes;
-
     std::vector <Note> scaleNotes;
-
     int notePos = notePosition(startingNote);
 
+    // Initializes notes
     Note firstNote(startingNote);
     Note secondNote(startingNote);
     Note thirdNote(startingNote);
     Note fourthNote(startingNote);
     Note fifthNote(startingNote);
     Note sixthNote(startingNote);
-
     Note seventhNote(startingNote);
 
+    // creates and adds major notes if major is input
     if (key == "major"){
         notePos = notePos + 2;
         secondNote.changeNote(posToNote(notePos).returnNoteName());
@@ -260,6 +249,8 @@ Chord findChord::makeSong(Note inputNote, std::string key, int length){
         notePos = notePos + 2;
         seventhNote.changeNote(posToNote(notePos).returnNoteName());
     }
+
+    // creates and adds minor notes if minor is input
     else if (key == "minor"){
         notePos = notePos + 2;
         secondNote.changeNote(posToNote(notePos).returnNoteName());
@@ -275,6 +266,7 @@ Chord findChord::makeSong(Note inputNote, std::string key, int length){
         seventhNote.changeNote(posToNote(notePos).returnNoteName());
     }
 
+    // Pushes the notes to the scale to create either a major or minor scale based on input
     scaleNotes.push_back(firstNote);
     scaleNotes.push_back(secondNote);
     scaleNotes.push_back(thirdNote);
@@ -282,36 +274,38 @@ Chord findChord::makeSong(Note inputNote, std::string key, int length){
     scaleNotes.push_back(fifthNote);
     scaleNotes.push_back(sixthNote);
     scaleNotes.push_back(seventhNote);
+
+    // Ensures that the randomization will be different each time the program is run
     srand(time(NULL));
+
+    // Randomly adds notes from the scale to the song for the specified length
     for (int x = 0; x < length; x++){
-      
         int randomNote = rand() % 6;
         songNotes.insertNote(scaleNotes.at(randomNote));    
-        // std::cout << scaleNotes.at(randomNote).returnNoteName();
     }
 
+    // Returns the chord of the song
     return songNotes;
 }
 
+// Method returns a major chord for trumpet and flute given an input note and inversion
 Chord findChord::blowInstrumentsMajor(Note inputNote, int inversion){
+
+    // Initializes notes and position of input note
     Note firstNote = inputNote;
     Note secondNote ("C", 0);
     Note thirdNote ("D", 0);
-
     int position = notePosition(inputNote);
 
-    // Base form
+    // Base position of a major triad, notes added to first chord to be returned 
     if (inversion == 1){
-    // Major third
     position = position + 4;
     secondNote = posToNote(position);
     position = position + 3;
     thirdNote = posToNote(position);
     }
 
-    // The following inversions need to be completed.
-
-    // First Inversion
+    // First Inversion of the major triad, notes added to second chord to be returned
     else if (inversion == 2){
         position = position + 4;
         firstNote = posToNote(position);
@@ -321,7 +315,7 @@ Chord findChord::blowInstrumentsMajor(Note inputNote, int inversion){
         thirdNote = posToNote(position);
     }
 
-    // // Second Inversion
+    // Second inversion of the major triad, notes added to the third chord to be returned
     else if (inversion == 3){
         position = position + 7;
         firstNote = posToNote(position);
@@ -341,23 +335,24 @@ Chord findChord::blowInstrumentsMajor(Note inputNote, int inversion){
     return newNotes;
 }
 
+// Method returns a chord in a minor scale given an input note and inversion
 Chord findChord::blowInstrumentsMinor(Note inputNote, int inversion){
+   
+    // Initializes notes and position of input note
     Note firstNote = inputNote;
     Note secondNote ("C", 0);
     Note thirdNote ("D", 0);
-
     int position = notePosition(inputNote);
 
-    // Base form
+    // Base position of a minor triad, notes added to first chord to be returned 
     if (inversion == 1){
-    // Major third
         position = position + 3;
         secondNote = posToNote(position);
         position = position + 4; 
         thirdNote = posToNote(position);
     }
 
-    // First Inversion
+    // First Inversion of the minor triad, notes added to second chord to be returned
     else if (inversion == 2){
         position = position + 3;
         firstNote = posToNote(position);
@@ -365,10 +360,9 @@ Chord findChord::blowInstrumentsMinor(Note inputNote, int inversion){
         secondNote = posToNote(position);
         position = position + 5; 
         thirdNote = posToNote(position);
-        // std::cout << "second-inversion ";
     }
 
-    // // Second Inversion
+    // Second inversion of the minor triad, notes added to the third chord to be returned
     else if (inversion == 3){
         position = position + 7;
         firstNote = posToNote(position);
@@ -376,7 +370,6 @@ Chord findChord::blowInstrumentsMinor(Note inputNote, int inversion){
         secondNote = posToNote(position);
         position = position + 3;
         thirdNote = posToNote(position);
-        // std::cout << "third-inversion ";
     }
 
     // Make a new chord and add the notes to the chord
@@ -389,15 +382,18 @@ Chord findChord::blowInstrumentsMinor(Note inputNote, int inversion){
     return newNotes;
 }
 
+// Method returns an int given a note to represent its location on the piano
 int findChord::notePosition(Note inputNote){
+
+    // Initializes variables
     std::string noteName = inputNote.returnNoteName();
     int octave = inputNote.returnOctave();
-
+    
+    // Since each octave has 12 different notes, we will increase the position by 12 for each octave
     int ocativeMultiplier = octave;
     ocativeMultiplier = ocativeMultiplier * 12;
-    // std:: cout << ocativeMultiplier;
 
-    //Returns relative position, add equivalence classes for flats later
+    // Returns position of note based on the name of the note
     if (noteName == "C"){
         return 12 + ocativeMultiplier;
     } else if (noteName == "C#"){
@@ -424,18 +420,20 @@ int findChord::notePosition(Note inputNote){
         return 11 + ocativeMultiplier;
     }
 
-    // Need to return something at the end just return some 13 + octiveMultiplier
+    // Need to return something at the end, so we just return some 13 + octiveMultiplier
     return 13 + ocativeMultiplier;
 };
 
+// Method returns a note given an int to represent the note on the piano
 Note findChord::posToNote(int position){
 
-    // std::cout << position << endl;
+    // Initializes variables and calcaultes octave and mod of position
     int Octave = position / 12;
     position = position % 12;
     std::string keyName;
     Note returnedNote ("Init", Octave);
     
+    // Returns the note name given it's position
     if (position == 0){
         returnedNote.changeNote("C");
     }
@@ -473,5 +471,6 @@ Note findChord::posToNote(int position){
         returnedNote.changeNote("B");
     }
  
+    // Returns Note
     return returnedNote;
 };

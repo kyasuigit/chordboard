@@ -11,10 +11,10 @@ int main(){
     testChord.insertNote(middleC);
     testChord.insertNote(middleB);
     
-    findChord tryMajor(testChord);
+    findChord tryMajor = findChord();
 
-    vector<Chord> majorChord = tryMajor.findMajor(testChord);
-    vector<Chord> minorChord = tryMajor.findMinor(testChord);
+    std::vector<Chord> majorChord = tryMajor.findMajor(testChord);
+    std::vector<Chord> minorChord = tryMajor.findMinor(testChord);
 
     // std::vector<Note> noteList = majorChord.at(0).returnNoteVector();
 
@@ -23,7 +23,7 @@ int main(){
 
 
     for (int i=0; i< majorChord.size(); i++){
-        vector<Note> thisGay = majorChord.at(i).returnNoteVector();
+        std::vector<Note> thisGay = majorChord.at(i).returnNoteVector();
         Note keyName("A", 8);
         for (unsigned x=0; x < thisGay.size(); x++){
             Note thisThing = thisGay.at(x);
@@ -36,7 +36,7 @@ int main(){
     }
 
     for (int j=0; j< minorChord.size(); j++){
-        vector<Note> secondGey = minorChord.at(j).returnNoteVector();
+        std::vector<Note> secondGey = minorChord.at(j).returnNoteVector();
         Note keyName("A", 8);
         for (unsigned x=0; x < secondGey.size(); x++){
             if (x == 0){
@@ -49,8 +49,8 @@ int main(){
         }
     }
 
-    vector <Note> songVector = tryMajor.makeSong(middleC, "minor", 5).returnNoteVector();
-    vector <Note> secondSongVector = tryMajor.makeSong(middleB, "minor", 5).returnNoteVector();
+    std::vector <Note> songVector = tryMajor.makeSong(middleC, "minor", 5).returnNoteVector();
+    std::vector <Note> secondSongVector = tryMajor.makeSong(middleB, "minor", 5).returnNoteVector();
 
     for (int i = 0; i < songVector.size(); i++){
         std::cout << songVector.at(i).returnNoteName();

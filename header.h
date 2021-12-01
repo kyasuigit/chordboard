@@ -7,7 +7,6 @@
 #include <iostream>
 #include "Chord.h"
 
-#include "Database.h"
 #include "Note.h"
 // #include "Backend.h"
 #include "findChord.h"
